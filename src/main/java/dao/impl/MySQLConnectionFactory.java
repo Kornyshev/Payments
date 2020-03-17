@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class MySQLConnectionFactory implements ConnectionFactory {
 
     private static final String MySQL_URL =
-            "jdbc:mysql://localhost:3306/books_site?" +
+            "jdbc:mysql://localhost:3306/payments_project?" +
                     "useUnicode=true&useJDBC" +
                     "CompliantTimezoneShift=true&" +
                     "useLegacyDatetimeCode=false&serverTimezone=UTC";

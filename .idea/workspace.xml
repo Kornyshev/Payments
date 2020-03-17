@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4c2eb091-d067-4d90-9dc6-42f63feef65c" name="Default Changelist" comment="" />
+    <list default="true" id="4c2eb091-d067-4d90-9dc6-42f63feef65c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/impl/MySQLConnectionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/MySQLConnectionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/SomeBusinessLogic.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,6 +14,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -39,6 +44,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -51,13 +57,17 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1584461479681">
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1584471318799">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1584461479681" />
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1584471318799" />
     <state x="596" y="103" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1584461275537">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="596" y="103" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.0.1536.824@0.0.1536.824" timestamp="1584461275537" />
+    <state x="277" y="55" key="SettingsEditor" timestamp="1584465946045">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1584465946045" />
   </component>
 </project>
