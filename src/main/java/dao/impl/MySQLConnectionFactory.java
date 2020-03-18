@@ -36,5 +36,6 @@ public class MySQLConnectionFactory implements ConnectionFactory {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         USER = reader.readLine();
         PASSWORD = reader.readLine();
+        reader.close();
     }
 }

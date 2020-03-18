@@ -2,14 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c2eb091-d067-4d90-9dc6-42f63feef65c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/impl/MySQLConnectionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/MySQLConnectionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/SomeBusinessLogic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/entities/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/entities/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/FillingAllTablesWithValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/FillingAllTablesWithValues.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/FirstTestClass.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ErrorTreeViewConfiguration">
+    <option name="autoscrollToSource" value="true" />
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -42,9 +50,43 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+  </component>
+  <component name="RunManager" selected="Application.FillingAllTablesWithValues">
+    <configuration name="FillingAllTablesWithValues" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="utils.FillingAllTablesWithValues" />
+      <module name="Payments" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dao.impl.Test" />
+      <module name="Payments" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dao.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.FillingAllTablesWithValues" />
+        <item itemvalue="Application.Test" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -57,17 +99,37 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1584471318799">
+    <state x="527" y="215" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584552758756">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1584471318799" />
+    <state x="527" y="215" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1584552758756" />
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1584556388161">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1584556388161" />
     <state x="596" y="103" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1584461275537">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="596" y="103" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.0.1536.824@0.0.1536.824" timestamp="1584461275537" />
-    <state x="277" y="55" key="SettingsEditor" timestamp="1584465946045">
+    <state width="1493" height="399" key="GridCell.Tab.0.bottom" timestamp="1584557072076">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1584465946045" />
+    <state width="1493" height="399" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584557072076" />
+    <state width="1493" height="399" key="GridCell.Tab.0.center" timestamp="1584557072075">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="399" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1584557072075" />
+    <state width="1493" height="399" key="GridCell.Tab.0.left" timestamp="1584557072075">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="399" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1584557072075" />
+    <state width="1493" height="399" key="GridCell.Tab.0.right" timestamp="1584557072075">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="399" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1584557072075" />
+    <state x="277" y="0" key="SettingsEditor" timestamp="1584551406832">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1584551406832" />
   </component>
 </project>
