@@ -44,6 +44,6 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client [name = " + name + ", birthday = " + birthDay + "]";
+        return "Client [id = " + id + ", name = " + name + ", birthday = " + birthDay + ", cards quantity = " + cardsQuantity + "]";
     }
 }

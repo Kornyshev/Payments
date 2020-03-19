@@ -32,12 +32,54 @@ public class ClientDaoImpl implements ClientDAO {
         return res;
     }
 
-    public Client retrieveClientByID(int id) {
-        return null;
+    /**
+     * This method gets a client from DB by ID
+     * @param id
+     * @return
+     */
+    public Client retrieveClientByID(int id) throws SQLException, ClassNotFoundException {
+        Client client = new Client();
+        conn = new MySQLConnectionFactory().createConnection();
+        if (conn == null) return null;
+        st = conn.prepareStatement("SELECT * FROM payments_project.clients WHERE id = ?;");
+        st.setInt(1, id);
+        rs = st.executeQuery();
+        while (rs.next()) {
+            client.id = rs.getInt("id");
+            client.name = rs.getString("name");
+            client.birthDay = rs.getString("birthday");
+            client.cardsQuantity = rs.getInt("cards_quantity");
+        }
+        rs.close();
+        st.close();
+        conn.close();
+        return client;
     }
 
-    public Client retrieveClientByName(String name) {
-        return null;
+    /**
+     * This method gets a client from DB by name
+     * @param name
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public Client retrieveClientByName(String name) throws SQLException, ClassNotFoundException {
+        Client client = new Client();
+        conn = new MySQLConnectionFactory().createConnection();
+        if (conn == null) return null;
+        st = conn.prepareStatement("SELECT * FROM payments_project.clients WHERE name = ?;");
+        st.setString(1, name);
+        rs = st.executeQuery();
+        while (rs.next()) {
+            client.id = rs.getInt("id");
+            client.name = name;
+            client.birthDay = rs.getString("birthday");
+            client.cardsQuantity = rs.getInt("cards_quantity");
+        }
+        rs.close();
+        st.close();
+        conn.close();
+        return client;
     }
 
     public List<CreditCard> retrieveCardsBelongingClient(String name) {

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class InsertionRandomClientsToDB {
+public class InsertionRndClientsToDB {
 
     /**
      * This method inserts set of clients into Database using DAO interface.
@@ -44,7 +44,8 @@ public class InsertionRandomClientsToDB {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             reader.lines().forEach(names::add);
-        } catch (FileNotFoundException e) {
+            reader.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         int tmp;
