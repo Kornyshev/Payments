@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c2eb091-d067-4d90-9dc6-42f63feef65c" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/utils/InsertionRndClientsToDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/InsertionRndClientsToDB.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/impl/ClientDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/ClientDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/ClientDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/ClientDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/entities/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/entities/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/InsertionRandomClientsToDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/InsertionRndClientsToDB.java" afterDir="false" />
+>>>>>>> 838c7cfeb4b5816cc46590033305544b61d98c80
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
