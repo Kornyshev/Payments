@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c2eb091-d067-4d90-9dc6-42f63feef65c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/impl/MySQLConnectionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/MySQLConnectionFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/entities/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/entities/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/FillingAllTablesWithValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/FillingAllTablesWithValues.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/FirstTestClass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/impl/ClientDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/ClientDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/ClientDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/ClientDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/FillingAllTablesWithValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/InsertionRandomClientsToDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,13 +52,39 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
-  <component name="RunManager" selected="Application.FillingAllTablesWithValues">
-    <configuration name="FillingAllTablesWithValues" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="utils.FillingAllTablesWithValues" />
+  <component name="RunManager" selected="Application.InsertionRandomClientsToDB">
+    <configuration name="ClientDaoImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dao.impl.ClientDaoImpl" />
+      <module name="Payments" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dao.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InsertionRandomClientsToDB" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="utils.InsertionRandomClientsToDB" />
       <module name="Payments" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view.Main" />
+      <module name="Payments" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -83,7 +107,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.FillingAllTablesWithValues" />
+        <item itemvalue="Application.InsertionRandomClientsToDB" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.ClientDaoImpl" />
         <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
@@ -111,22 +137,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="596" y="103" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.0.1536.824@0.0.1536.824" timestamp="1584461275537" />
-    <state width="1493" height="399" key="GridCell.Tab.0.bottom" timestamp="1584557072076">
+    <state width="1493" height="178" key="GridCell.Tab.0.bottom" timestamp="1584632625654">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="399" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584557072076" />
-    <state width="1493" height="399" key="GridCell.Tab.0.center" timestamp="1584557072075">
+    <state width="1493" height="178" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584632625654" />
+    <state width="1493" height="178" key="GridCell.Tab.0.center" timestamp="1584632625653">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="399" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1584557072075" />
-    <state width="1493" height="399" key="GridCell.Tab.0.left" timestamp="1584557072075">
+    <state width="1493" height="178" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1584632625653" />
+    <state width="1493" height="178" key="GridCell.Tab.0.left" timestamp="1584632625653">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="399" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1584557072075" />
-    <state width="1493" height="399" key="GridCell.Tab.0.right" timestamp="1584557072075">
+    <state width="1493" height="178" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1584632625653" />
+    <state width="1493" height="178" key="GridCell.Tab.0.right" timestamp="1584632625654">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="399" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1584557072075" />
+    <state width="1493" height="178" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1584632625654" />
     <state x="277" y="0" key="SettingsEditor" timestamp="1584551406832">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -3,10 +3,11 @@ package dao.interfaces;
 import services.entities.Client;
 import services.entities.CreditCard;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface ClientDAO {
-    int insertClient(Client client);
+    int insertClient(Client client) throws SQLException, ClassNotFoundException;
     Client retrieveClientByID(int id);
     Client retrieveClientByName(String name);
     List<CreditCard> retrieveCardsBelongingClient(String name);
