@@ -12,7 +12,7 @@ public interface ClientDAO {
     Client retrieveClientByName(String name) throws SQLException, ClassNotFoundException;
     List<Client> retrieveAllClients() throws SQLException, ClassNotFoundException;
     List<CreditCard> retrieveCardsBelongingClient(String name);
-    int updateClient(int cardsAmount);
+    int updateClientsCardsQuantity(int clientID, int changing) throws SQLException, ClassNotFoundException;
     int deleteClientByID(int id);
     int deleteClientByName(String name);
 }

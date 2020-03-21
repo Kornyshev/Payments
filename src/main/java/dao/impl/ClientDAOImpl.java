@@ -41,7 +41,6 @@ public class ClientDAOImpl implements ClientDAO {
     public Client retrieveClientByID(int id) throws SQLException, ClassNotFoundException {
         Client client = new Client();
         conn = new MySQLConnectionFactory().createConnection();
-        if (conn == null) return null;
         st = conn.prepareStatement("SELECT * FROM payments_project.clients WHERE id = ?;");
         st.setInt(1, id);
         rs = st.executeQuery();
@@ -67,7 +66,6 @@ public class ClientDAOImpl implements ClientDAO {
     public Client retrieveClientByName(String name) throws SQLException, ClassNotFoundException {
         Client client = new Client();
         conn = new MySQLConnectionFactory().createConnection();
-        if (conn == null) return null;
         st = conn.prepareStatement("SELECT * FROM payments_project.clients WHERE name = ?;");
         st.setString(1, name);
         rs = st.executeQuery();
@@ -93,7 +91,6 @@ public class ClientDAOImpl implements ClientDAO {
     public List<Client> retrieveAllClients() throws SQLException, ClassNotFoundException {
         List<Client> clients = new ArrayList<>();
         conn = new MySQLConnectionFactory().createConnection();
-        if (conn == null) return null;
         st = conn.prepareStatement("SELECT * FROM payments_project.clients;");
         rs = st.executeQuery();
         int id;
@@ -117,8 +114,32 @@ public class ClientDAOImpl implements ClientDAO {
         return null;
     }
 
-    public int updateClient(int cardsAmount) {
-        return 0;
+    /**
+     * Updating client's cards quantity. It could be +1 or -1.
+     * Depends on the parameter Changing.
+     * @param clientID
+     * @param changing
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public int updateClientsCardsQuantity(int clientID, int changing) throws SQLException, ClassNotFoundException {
+        conn = new MySQLConnectionFactory().createConnection();
+        st = conn.prepareStatement("SELECT cards_quantity FROM payments_project.clients WHERE id = ?;");
+        st.setInt(1, clientID);
+        rs = st.executeQuery();
+        int quantity = 0;
+        while (rs.next()) {
+            quantity = rs.getInt("cards_quantity") + changing;
+        }
+        st = conn.prepareStatement("UPDATE `payments_project`.`clients` SET `cards_quantity` = ? WHERE `id` = ?;");
+        st.setInt(1, quantity);
+        st.setInt(2, clientID);
+        int res = st.executeUpdate();
+        rs.close();
+        st.close();
+        conn.close();
+        return res;
     }
 
     public int deleteClientByID(int id) {

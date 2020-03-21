@@ -47,14 +47,12 @@ public class InsertionRndCreditCardsToDB {
         ClientDAO clientDao = new ClientDAOImpl();
         clientDao.retrieveAllClients()
                 .forEach(client -> clientIDs.add(client.id));
-        System.out.println(clientIDs.size() + " clientIDs size");
         for (Integer id : clientIDs) {
             int rnd = (int) (Math.random() * 4) + 1;
             for (int i = 0; i < rnd; i++) {
                 cards.add(generateCreditCardToClientID(id));
             }
         }
-        System.out.println(cards.size() + " cards size");
         return cards
                 .stream()
                 .sorted((o1, o2) -> compareToExpiryDates(o1.expiryDate, o2.expiryDate))
