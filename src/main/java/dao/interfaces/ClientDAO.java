@@ -10,6 +10,7 @@ public interface ClientDAO {
     int insertClient(Client client) throws SQLException, ClassNotFoundException;
     Client retrieveClientByID(int id) throws SQLException, ClassNotFoundException;
     Client retrieveClientByName(String name) throws SQLException, ClassNotFoundException;
+    List<Client> retrieveAllClients() throws SQLException, ClassNotFoundException;
     List<CreditCard> retrieveCardsBelongingClient(String name);
     int updateClient(int cardsAmount);
     int deleteClientByID(int id);

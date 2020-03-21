@@ -20,6 +20,13 @@ public class Client {
         this.birthDay = birthDay;
     }
 
+    public Client(int id, String name, String birthDay, int cardsQuantity) {
+        this.id = id;
+        this.name = name;
+        this.birthDay = birthDay;
+        this.cardsQuantity = cardsQuantity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,6 +51,8 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client [id = " + id + ", name = " + name + ", birthday = " + birthDay + ", cards quantity = " + cardsQuantity + "]";
+        return "Client [id = " + id + ", name = " + name +
+                ", birthday = " + birthDay +
+                ", cards quantity = " + cardsQuantity + "]";
     }
 }

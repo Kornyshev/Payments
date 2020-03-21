@@ -3,7 +3,7 @@ package dao.impl;
 import dao.interfaces.PaymentDAO;
 import services.entities.Payment;
 
-public class PaymentDaoImpl implements PaymentDAO {
+public class PaymentDAOImpl implements PaymentDAO {
     public int insertPayment(Payment payment) {
         return 0;
     }

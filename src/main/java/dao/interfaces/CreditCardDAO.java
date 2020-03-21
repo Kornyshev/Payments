@@ -3,10 +3,11 @@ package dao.interfaces;
 import services.entities.CreditCard;
 import services.entities.Payment;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface CreditCardDAO {
-    int insertCreditCard(CreditCard card);
+    int insertCreditCard(CreditCard card) throws SQLException, ClassNotFoundException;
     CreditCard retrieveCardByNumber(int number);
     List<CreditCard> retrieveCardsByExpiryDate(String expiryDate);
     List<Payment> retrievePaymentsByCreditCard(int number);

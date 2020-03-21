@@ -5,9 +5,10 @@ import services.entities.Client;
 import services.entities.CreditCard;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ClientDaoImpl implements ClientDAO {
+public class ClientDAOImpl implements ClientDAO {
 
     private Connection conn;
     private PreparedStatement st;
@@ -22,7 +23,7 @@ public class ClientDaoImpl implements ClientDAO {
      */
     public int insertClient(Client client) throws SQLException, ClassNotFoundException {
         conn = new MySQLConnectionFactory().createConnection();
-        st = conn.prepareStatement("INSERT INTO payments_project.clients(name, birthday, cards_quantity) values(?, ?, ?);");
+        st = conn.prepareStatement("INSERT INTO `payments_project`.`clients`(`id`,`name`,`birthday`,`cards_quantity`)VALUES(?,?,?);");
         st.setString(1, client.name);
         st.setDate(2, Date.valueOf(client.birthDay));
         st.setInt(3, client.cardsQuantity);
@@ -80,6 +81,36 @@ public class ClientDaoImpl implements ClientDAO {
         st.close();
         conn.close();
         return client;
+    }
+
+
+    /**
+     * This method just returns list of all clients
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public List<Client> retrieveAllClients() throws SQLException, ClassNotFoundException {
+        List<Client> clients = new ArrayList<>();
+        conn = new MySQLConnectionFactory().createConnection();
+        if (conn == null) return null;
+        st = conn.prepareStatement("SELECT * FROM payments_project.clients;");
+        rs = st.executeQuery();
+        int id;
+        String name;
+        String birthDay;
+        int cardsQuantity;
+        while (rs.next()) {
+            id = rs.getInt("id");
+            name = rs.getString("name");
+            birthDay = rs.getString("birthday");
+            cardsQuantity = rs.getInt("cards_quantity");
+            clients.add(new Client(id, name, birthDay, cardsQuantity));
+        }
+        rs.close();
+        st.close();
+        conn.close();
+        return clients;
     }
 
     public List<CreditCard> retrieveCardsBelongingClient(String name) {
