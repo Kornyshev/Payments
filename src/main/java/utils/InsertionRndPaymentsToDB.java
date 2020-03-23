@@ -85,7 +85,11 @@ public class InsertionRndPaymentsToDB {
      * @return
      */
     private static int generateRandomAmount() {
-        return (int)(Math.random() * 70) * 100;
+        int res = (int)(Math.random() * 70) * 100;
+        if (Math.random() < 0.5)
+            return res;
+        else
+            return res * (-1);
     }
 
     /**

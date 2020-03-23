@@ -3,17 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4c2eb091-d067-4d90-9dc6-42f63feef65c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/impl/ClientDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/ClientDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/impl/CreditCardDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/CreditCardDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/impl/PaymentDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/PaymentDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/ClientDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/ClientDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/CreditCardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/CreditCardDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/PaymentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/PaymentDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/entities/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/entities/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/entities/CreditCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/entities/CreditCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/entities/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/entities/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/InsertionRndClientsToDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/InsertionRndClientsToDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/InsertionRndCreditCardsToDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/InsertionRndCreditCardsToDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/utils/InsertionRndPaymentsToDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/InsertionRndPaymentsToDB.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -163,22 +152,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict/0.0.1536.824@0.0.1536.824" timestamp="1584646736232" />
-    <state width="1493" height="355" key="GridCell.Tab.0.bottom" timestamp="1584814727551">
+    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1584819596335">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="355" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584814727551" />
-    <state width="1493" height="355" key="GridCell.Tab.0.center" timestamp="1584814727551">
+    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584819596335" />
+    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1584819596335">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="355" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1584814727551" />
-    <state width="1493" height="355" key="GridCell.Tab.0.left" timestamp="1584814727551">
+    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1584819596335" />
+    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1584819596334">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="355" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1584814727551" />
-    <state width="1493" height="355" key="GridCell.Tab.0.right" timestamp="1584814727551">
+    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1584819596334" />
+    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1584819596335">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="355" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1584814727551" />
+    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1584819596335" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1584791995678">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
