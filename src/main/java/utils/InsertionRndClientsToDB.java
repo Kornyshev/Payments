@@ -17,9 +17,8 @@ public class InsertionRndClientsToDB {
     public static void main(String[] args) {
         /*
         Method for action
-        insertionClientsSetIntoDB(generateRandomClients(900));
          */
-        insertionClientsSetIntoDB(generateRandomClients(900));
+        //insertionClientsSetIntoDB(generateRandomClients(900));
     }
 
     /**

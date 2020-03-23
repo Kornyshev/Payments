@@ -19,7 +19,7 @@ public class InsertionRndPaymentsToDB {
         /*
         Method to action
          */
-        insertionPaymentsToDB(generateRandomPayments());
+        //insertionPaymentsToDB(generateRandomPayments());
     }
 
     /**

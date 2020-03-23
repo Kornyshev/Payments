@@ -15,8 +15,8 @@ public class InsertionRndCreditCardsToDB {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         /*
         Method for action
-        insertionCardsSetIntoDB(generateRandomCreditCards());
          */
+        //insertionCardsSetIntoDB(generateRandomCreditCards());
     }
 
     /**

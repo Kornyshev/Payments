@@ -1,5 +1,6 @@
 package dao.impl;
 
+import dao.interfaces.ClientDAO;
 import dao.interfaces.CreditCardDAO;
 import dao.interfaces.PaymentDAO;
 import services.entities.Payment;
@@ -9,7 +10,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Implementation of PaymentDAO interface.
+ * It completed on 23.03.2020.
+ */
 public class PaymentDAOImpl implements PaymentDAO {
 
     private Connection conn;
@@ -77,5 +84,55 @@ public class PaymentDAOImpl implements PaymentDAO {
         st.close();
         conn.close();
         return payment;
+    }
+
+    /**
+     * This method returns list of payments for one card by number.
+     * @param number
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    @Override
+    public List<Payment> retrievePaymentsByCardNumber(long number) throws SQLException, ClassNotFoundException {
+        List<Payment> payments = new ArrayList<>();
+        conn = new MySQLConnectionFactory().createConnection();
+        st = conn.prepareStatement("SELECT * FROM payments_project.payments WHERE card_number = ?;");
+        st.setLong(1, number);
+        rs = st.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            long cardNumber = rs.getLong("card_number");
+            PaymentType type = PaymentType.valueOf(rs.getString("type"));
+            int amount = rs.getInt("amount");
+            long destination = rs.getLong("destination");
+            payments.add(new Payment(id, cardNumber, type, amount, destination));
+        }
+        rs.close();
+        st.close();
+        conn.close();
+        return payments;
+    }
+
+    /**
+     * This method returns all client's payments through all his cards.
+     * @param name
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    @Override
+    public List<Payment> retrievePaymentsByClient(String name) throws SQLException, ClassNotFoundException {
+        List<Payment> payments = new ArrayList<>();
+        ClientDAO clientDAO = new ClientDAOImpl();
+        PaymentDAO paymentDAO = new PaymentDAOImpl();
+        clientDAO.retrieveClientsCardsByName(name).forEach(card -> {
+            try {
+                payments.addAll(paymentDAO.retrievePaymentsByCardNumber(card.cardNumber));
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+        return payments;
     }
 }

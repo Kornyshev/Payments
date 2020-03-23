@@ -8,6 +8,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of ClientDAO interface.
+ * It completed on 23.03.2020.
+ */
 public class ClientDAOImpl implements ClientDAO {
 
     private Connection conn;
@@ -110,8 +114,60 @@ public class ClientDAOImpl implements ClientDAO {
         return clients;
     }
 
-    public List<CreditCard> retrieveCardsBelongingClient(String name) {
-        return null;
+    /**
+     * This method returns all client's cards by his name
+     * @param name
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public List<CreditCard> retrieveClientsCardsByName(String name) throws SQLException, ClassNotFoundException {
+        List<CreditCard> cards = new ArrayList<>();
+        conn = new MySQLConnectionFactory().createConnection();
+        st = conn.prepareStatement("SELECT * FROM payments_project.credit_cards WHERE client_id = " +
+                "(SELECT id FROM payments_project.clients WHERE name = ?);");
+        st.setString(1, name);
+        rs = st.executeQuery();
+        while (rs.next()) {
+            long number = rs.getLong("number");
+            int id = rs.getInt("client_id");
+            int limit = rs.getInt("limit");
+            int balance = rs.getInt("balance");
+            String expiryDate = rs.getString("expiry_date");
+            cards.add(new CreditCard(number, id, limit, balance, expiryDate));
+        }
+        rs.close();
+        st.close();
+        conn.close();
+        return cards;
+    }
+
+
+    /**
+     * This method returns all client's cards by his ID
+     * @param id
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    @Override
+    public List<CreditCard> retrieveClientsCardsByID(int id) throws SQLException, ClassNotFoundException {
+        List<CreditCard> cards = new ArrayList<>();
+        conn = new MySQLConnectionFactory().createConnection();
+        st = conn.prepareStatement("SELECT * FROM payments_project.credit_cards WHERE client_id = ?;");
+        st.setInt(1, id);
+        rs = st.executeQuery();
+        while (rs.next()) {
+            long number = rs.getLong("number");
+            int limit = rs.getInt("limit");
+            int balance = rs.getInt("balance");
+            String expiryDate = rs.getString("expiry_date");
+            cards.add(new CreditCard(number, id, limit, balance, expiryDate));
+        }
+        rs.close();
+        st.close();
+        conn.close();
+        return cards;
     }
 
     /**
@@ -142,11 +198,91 @@ public class ClientDAOImpl implements ClientDAO {
         return res;
     }
 
-    public int deleteClientByID(int id) {
-        return 0;
+    /**
+     * This method to force deletion of client by ID, without checking balances on his cards.
+     * @param id
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public int forceDeleteClientByID(int id) throws SQLException, ClassNotFoundException {
+        conn = new MySQLConnectionFactory().createConnection();
+        st = conn.prepareStatement("DELETE FROM payments_project.clients WHERE id = ?;");
+        st.setInt(1, id);
+        int res = st.executeUpdate();
+        st.close();
+        conn.close();
+        return res;
     }
 
-    public int deleteClientByName(String name) {
-        return 0;
+    /**
+     * This method to force deletion of client by name, without checking balances on his cards.
+     * @param name
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public int forceDeleteClientByName(String name) throws SQLException, ClassNotFoundException {
+        conn = new MySQLConnectionFactory().createConnection();
+        st = conn.prepareStatement("DELETE FROM payments_project.clients WHERE name = ?;");
+        st.setString(1, name);
+        int res = st.executeUpdate();
+        st.close();
+        conn.close();
+        return res;
+    }
+
+    /**
+     * This method delete client by ID quite more gently,
+     * with checking his balances on cards.
+     * And returns amount to receiving in cash box,
+     * if it's exist. If not - method returns -1.
+     * @param id
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    @Override
+    public int clientDeletionWithCheckingByID(int id) throws SQLException, ClassNotFoundException {
+        ClientDAO clientDAO = new ClientDAOImpl();
+        List<CreditCard> cards = clientDAO.retrieveClientsCardsByID(id);
+        int balanceSum = cards.stream().mapToInt(card -> card.balance).sum();
+        int limitSum = cards.stream().mapToInt(card -> card.creditLimit).sum();
+        if (limitSum > balanceSum) {
+            return -1;
+        } else {
+            if (clientDAO.forceDeleteClientByID(id) > 0) {
+                return balanceSum - limitSum;
+            } else {
+                throw new SQLException("Something wrong with the client [id] -> " + id);
+            }
+        }
+    }
+
+    /**
+     * This method delete client by Name quite more gently,
+     * with checking his balances on cards.
+     * And returns amount to receiving in cash box,
+     * if it's exist. If not - method returns -1.
+     * @param name
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    @Override
+    public int clientDeletionWithCheckingByName(String name) throws SQLException, ClassNotFoundException {
+        ClientDAO clientDAO = new ClientDAOImpl();
+        List<CreditCard> cards = clientDAO.retrieveClientsCardsByName(name);
+        int balanceSum = cards.stream().mapToInt(card -> card.balance).sum();
+        int limitSum = cards.stream().mapToInt(card -> card.creditLimit).sum();
+        if (limitSum > balanceSum) {
+            return -1;
+        } else {
+            if (clientDAO.forceDeleteClientByName(name) > 0) {
+                return balanceSum - limitSum;
+            } else {
+                throw new SQLException("Something wrong with deletion of the client [name] -> " + name);
+            }
+        }
     }
 }

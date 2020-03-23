@@ -19,6 +19,14 @@ public class Payment {
         this.destination = destination;
     }
 
+    public Payment(int paymentId, long cardNumber, PaymentType paymentType, int amount, long destination) {
+        this.paymentId = paymentId;
+        this.cardNumber = cardNumber;
+        this.paymentType = paymentType;
+        this.amount = amount;
+        this.destination = destination;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -11,8 +11,11 @@ public interface ClientDAO {
     Client retrieveClientByID(int id) throws SQLException, ClassNotFoundException;
     Client retrieveClientByName(String name) throws SQLException, ClassNotFoundException;
     List<Client> retrieveAllClients() throws SQLException, ClassNotFoundException;
-    List<CreditCard> retrieveCardsBelongingClient(String name);
+    List<CreditCard> retrieveClientsCardsByName(String name) throws SQLException, ClassNotFoundException;
+    List<CreditCard> retrieveClientsCardsByID(int id) throws SQLException, ClassNotFoundException;
     int updateClientsCardsQuantity(int clientID, int changing) throws SQLException, ClassNotFoundException;
-    int deleteClientByID(int id);
-    int deleteClientByName(String name);
+    int forceDeleteClientByID(int id) throws SQLException, ClassNotFoundException;
+    int forceDeleteClientByName(String name) throws SQLException, ClassNotFoundException;
+    int clientDeletionWithCheckingByID(int id) throws SQLException, ClassNotFoundException;
+    int clientDeletionWithCheckingByName(String name) throws SQLException, ClassNotFoundException;
 }
