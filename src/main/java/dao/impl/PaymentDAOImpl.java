@@ -3,6 +3,7 @@ package dao.impl;
 import dao.interfaces.ClientDAO;
 import dao.interfaces.CreditCardDAO;
 import dao.interfaces.PaymentDAO;
+import services.entities.Client;
 import services.entities.Payment;
 import services.entities.PaymentType;
 
@@ -84,6 +85,32 @@ public class PaymentDAOImpl implements PaymentDAO {
         st.close();
         conn.close();
         return payment;
+    }
+
+    /**
+     * This method just returns all payments
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    @Override
+    public List<Payment> retrieveAllPayments() throws SQLException, ClassNotFoundException {
+        List<Payment> payments = new ArrayList<>();
+        conn = new MySQLConnectionFactory().createConnection();
+        st = conn.prepareStatement("SELECT * FROM payments_project.payments;");
+        rs = st.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            long cardNumber = rs.getLong("card_number");
+            PaymentType type = PaymentType.valueOf(rs.getString("type"));
+            int amount = rs.getInt("amount");
+            long destination = rs.getLong("destination");
+            payments.add(new Payment(id, cardNumber, type, amount, destination));
+        }
+        rs.close();
+        st.close();
+        conn.close();
+        return payments;
     }
 
     /**

@@ -3,23 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="4c2eb091-d067-4d90-9dc6-42f63feef65c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/impl/ClientDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/ClientDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/impl/CreditCardDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/CreditCardDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/impl/MySQLConnectionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/MySQLConnectionFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/impl/PaymentDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/PaymentDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/ClientDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/ClientDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/CreditCardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/CreditCardDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/interfaces/PaymentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/interfaces/PaymentDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/actions/GenerateNewClients.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/entities/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/entities/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/InsertionRndClientsToDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/InsertionRndClientsToDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/InsertionRndCreditCardsToDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/InsertionRndCreditCardsToDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/InsertionRndPaymentsToDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/InsertionRndPaymentsToDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/reports/ReportCardsByClientName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/reports/ReportCardsByClientName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/reports/ReportCardsWithMaxDebt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/reports/Report50CardsWithMaxDebt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/reports/ReportPaymentsByCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/reports/ReportPaymentsByCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/reports/ReportPaymentsByClientName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/reports/ReportPaymentsByClientName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/reports/ReportsByTables.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/reports/ReportsByTables.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dao/impl/ClientDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/impl/ClientDaoImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dao/impl/CreditCardDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/impl/CreditCardDaoImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dao/impl/PaymentDaoImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/impl/PaymentDaoImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/dao/interfaces/ClientDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/interfaces/ClientDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/utils/InsertionRndClientsToDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utils/InsertionRndClientsToDB.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/utils/InsertionRndPaymentsToDB.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utils/InsertionRndPaymentsToDB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dao/interfaces/CreditCardDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/interfaces/CreditCardDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dao/interfaces/PaymentDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dao/interfaces/PaymentDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/actions/GenerateNewClients.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/entities/Payment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/entities/Payment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/reports/ReportCardsByClientName.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/reports/ReportCardsByClientName.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/reports/ReportCardsWithMaxDebt.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +65,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
-  <component name="RunManager" selected="Application.ClientDAOImpl">
+  <component name="RunManager" selected="Application.Report50CardsWithMaxDebt">
     <configuration name="ClientDAOImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="dao.impl.ClientDAOImpl" />
       <module name="Payments" />
@@ -85,19 +85,6 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="dao.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="InsertionRndClientsToDB" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="utils.InsertionRndClientsToDB" />
-      <module name="Payments" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -131,13 +118,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Report50CardsWithMaxDebt" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="services.reports.Report50CardsWithMaxDebt" />
+      <module name="Payments" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="services.reports.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Report50CardsWithMaxDebt" />
         <item itemvalue="Application.ClientDAOImpl" />
         <item itemvalue="Application.InsertionRndPaymentsToDB" />
         <item itemvalue="Application.InsertionRndCreditCardsToDB" />
         <item itemvalue="Application.CreditCardDAOImpl" />
-        <item itemvalue="Application.InsertionRndClientsToDB" />
       </list>
     </recent_temporary>
   </component>
@@ -156,10 +156,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="527" y="215" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1584552758756" />
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1584992271862">
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1585073946089">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1584992271862" />
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1585073946089" />
     <state x="596" y="103" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1584461275537">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -172,22 +172,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict/0.0.1536.824@0.0.1536.824" timestamp="1584646736232" />
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom" timestamp="1584982387154">
+    <state width="1493" height="327" key="GridCell.Tab.0.bottom" timestamp="1585064918235">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584982387154" />
-    <state width="1493" height="211" key="GridCell.Tab.0.center" timestamp="1584982387154">
+    <state width="1493" height="327" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1585064918235" />
+    <state width="1493" height="327" key="GridCell.Tab.0.center" timestamp="1585064918235">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1584982387154" />
-    <state width="1493" height="211" key="GridCell.Tab.0.left" timestamp="1584982387154">
+    <state width="1493" height="327" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1585064918235" />
+    <state width="1493" height="327" key="GridCell.Tab.0.left" timestamp="1585064918235">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1584982387154" />
-    <state width="1493" height="211" key="GridCell.Tab.0.right" timestamp="1584982387154">
+    <state width="1493" height="327" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1585064918235" />
+    <state width="1493" height="327" key="GridCell.Tab.0.right" timestamp="1585064918235">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="211" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1584982387154" />
+    <state width="1493" height="327" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1585064918235" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1584791995678">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
