@@ -4,8 +4,8 @@ import dao.impl.CreditCardDAOImpl;
 import dao.impl.PaymentDAOImpl;
 import dao.interfaces.CreditCardDAO;
 import dao.interfaces.PaymentDAO;
-import services.entities.Payment;
-import services.entities.PaymentType;
+import entities.Payment;
+import entities.PaymentType;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class InsertionRndPaymentsToDB {
         /*
         Method to action
          */
-        //insertionPaymentsToDB(generateRandomPayments());
+        insertionPaymentsToDB(generateRandomPayments());
     }
 
     /**
@@ -29,6 +29,7 @@ public class InsertionRndPaymentsToDB {
      * @param payments
      */
     private static void insertionPaymentsToDB(Set<Payment> payments) {
+        System.out.println(payments.size() + " <- set.size()");
         PaymentDAO paymentDAO = new PaymentDAOImpl();
         payments.forEach(payment -> {
             try {

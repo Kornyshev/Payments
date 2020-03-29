@@ -3,9 +3,9 @@ package services.reports;
 import dao.impl.ClientDAOImpl;
 import dao.impl.CreditCardDAOImpl;
 import dao.impl.PaymentDAOImpl;
-import services.entities.Client;
-import services.entities.CreditCard;
-import services.entities.Payment;
+import entities.Client;
+import entities.CreditCard;
+import entities.Payment;
 
 import java.sql.SQLException;
 import java.util.List;

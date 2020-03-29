@@ -2,7 +2,7 @@ package utils;
 
 import dao.impl.ClientDAOImpl;
 import dao.interfaces.ClientDAO;
-import services.entities.Client;
+import entities.Client;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -18,7 +18,7 @@ public class InsertionRndClientsToDB {
         /*
         Method for action
          */
-        //insertionClientsSetIntoDB(generateRandomClients(900));
+        insertionClientsSetIntoDB(generateRandomClients(900));
     }
 
     /**

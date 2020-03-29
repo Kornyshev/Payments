@@ -4,7 +4,7 @@ import dao.impl.ClientDAOImpl;
 import dao.impl.CreditCardDAOImpl;
 import dao.interfaces.ClientDAO;
 import dao.interfaces.CreditCardDAO;
-import services.entities.CreditCard;
+import entities.CreditCard;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -16,7 +16,7 @@ public class InsertionRndCreditCardsToDB {
         /*
         Method for action
          */
-        //insertionCardsSetIntoDB(generateRandomCreditCards());
+        insertionCardsSetIntoDB(generateRandomCreditCards());
     }
 
     /**

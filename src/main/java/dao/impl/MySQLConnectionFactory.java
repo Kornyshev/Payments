@@ -21,11 +21,11 @@ public class MySQLConnectionFactory implements ConnectionFactory {
     private static String USER;
     private static String PASSWORD;
 
-    public Connection createConnection() throws ClassNotFoundException, SQLException {
+    public Connection createConnection() throws ClassNotFoundException, SQLException, LoginToMySQLException {
         try {
             getLoginSettings();
         } catch (IOException e) {
-            return null;
+            throw new LoginToMySQLException("Something wrong with access to file with login and passowrd", e);
         }
         Class.forName(MySQL_DRIVER);
         return DriverManager.getConnection(MySQL_URL, USER, PASSWORD);

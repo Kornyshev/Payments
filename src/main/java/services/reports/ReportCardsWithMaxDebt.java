@@ -2,14 +2,17 @@ package services.reports;
 
 import dao.impl.CreditCardDAOImpl;
 import dao.interfaces.CreditCardDAO;
-import services.entities.CreditCard;
+import entities.CreditCard;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Report50CardsWithMaxDebt {
+public class ReportCardsWithMaxDebt {
+
+    private static final int CARDS_QUANTITY = 50;
+
     public List<CreditCard> getReport() {
         CreditCardDAO cardDAO = new CreditCardDAOImpl();
         List<CreditCard> res = new ArrayList<>();
@@ -23,7 +26,7 @@ public class Report50CardsWithMaxDebt {
                 if (debt1 > debt2) return -1;
                 return 1;
             })
-                    .limit(50)
+                    .limit(CARDS_QUANTITY)
                     .collect(Collectors.toList());
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();

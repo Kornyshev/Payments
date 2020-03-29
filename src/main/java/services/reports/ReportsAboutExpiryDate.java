@@ -1,7 +1,7 @@
 package services.reports;
 
 import dao.impl.CreditCardDAOImpl;
-import services.entities.CreditCard;
+import entities.CreditCard;
 
 import java.sql.SQLException;
 import java.util.*;

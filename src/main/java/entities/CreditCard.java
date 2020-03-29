@@ -1,6 +1,7 @@
-package services.entities;
+package entities;
 
 public class CreditCard {
+    public int id;
     public long cardNumber;
     public int clientID;
     public int creditLimit;
@@ -11,6 +12,15 @@ public class CreditCard {
     }
 
     public CreditCard(long cardNumber, int clientID, int creditLimit, int balance, String expiryDate) {
+        this.cardNumber = cardNumber;
+        this.clientID = clientID;
+        this.creditLimit = creditLimit;
+        this.balance = balance;
+        this.expiryDate = expiryDate;
+    }
+
+    public CreditCard(int id, long cardNumber, int clientID, int creditLimit, int balance, String expiryDate) {
+        this.id = id;
         this.cardNumber = cardNumber;
         this.clientID = clientID;
         this.creditLimit = creditLimit;

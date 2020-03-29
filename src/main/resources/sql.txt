@@ -43,3 +43,11 @@ ADD CONSTRAINT `card_number`
   REFERENCES `payments_project`.`credit_cards` (`number`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+
+UPDATE `payments_project`.`clients` SET
+`id` = ?, `name` = ?, `birthday` = ?, `cards_quantity` = ? WHERE `id` = ?;
+
+UPDATE `payments_project`.`credit_cards` SET
+`id` = ?, `number` = ?, `client_id` = ?, `limit` = ?, `balance` = ?, `expiry_date` = ? WHERE `id` = ?;
+
+SELECT * FROM payments_project.credit_cards;

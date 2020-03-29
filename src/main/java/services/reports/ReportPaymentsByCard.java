@@ -1,7 +1,7 @@
 package services.reports;
 
 import dao.impl.PaymentDAOImpl;
-import services.entities.Payment;
+import entities.Payment;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

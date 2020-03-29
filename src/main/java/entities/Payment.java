@@ -1,4 +1,4 @@
-package services.entities;
+package entities;
 
 public class Payment {
     public int paymentId;
