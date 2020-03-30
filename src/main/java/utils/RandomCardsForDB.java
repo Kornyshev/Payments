@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class InsertionRndCreditCardsToDB {
+public class RandomCardsForDB {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException, LoginToMySQLException {
         /*
@@ -87,7 +87,7 @@ public class InsertionRndCreditCardsToDB {
      * @param clientID
      * @return
      */
-    private static CreditCard generateCreditCardToClientID(int clientID) {
+    public static CreditCard generateCreditCardToClientID(int clientID) {
         CreditCard creditCard = new CreditCard();
         creditCard.cardNumber = generateNumber();
         creditCard.clientID = clientID;

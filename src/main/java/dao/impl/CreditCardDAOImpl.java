@@ -197,10 +197,14 @@ public class CreditCardDAOImpl implements CreditCardDAO {
     }
 
     @Override
-    public int deleteCardByNumber(long number) throws SQLException {
+    public int deleteCardByNumber(long number) throws SQLException, LoginToMySQLException, ClassNotFoundException {
         st = conn.prepareStatement("DELETE FROM payments_project.credit_cards WHERE number = ?;");
         st.setLong(1, number);
         int res = st.executeUpdate();
+        ClientDAO clientDAO = new ClientDAOImpl();
+        CreditCardDAO cardDAO = new CreditCardDAOImpl();
+        clientDAO.updateClientsCardsQuantity
+                (cardDAO.retrieveCardByNumber(number).clientID, -1);
         DAO.closing(st, conn);
         logger.info("Credit card with the number = " + number + " successfully deleted (force method)");
         return res;

@@ -12,6 +12,6 @@ public interface CreditCardDAO extends DAO<CreditCard> {
     int retrieveCardBalanceByNumber(long number) throws SQLException;
     int updateCardBalanceByNumber(long number, int balanceAfterChanging) throws SQLException;
     int updateCreditLimitByNumber(long number, int newLimit) throws SQLException;
-    int deleteCardByNumber(long number) throws SQLException;
+    int deleteCardByNumber(long number) throws SQLException, LoginToMySQLException, ClassNotFoundException;
     int cardDeletionWithCheckingByNumber(long number) throws SQLException, ClassNotFoundException, LoginToMySQLException;
 }

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class InsertionRndClientsToDB {
+public class RandomClientsForDB {
 
     public static void main(String[] args) throws SQLException, LoginToMySQLException, ClassNotFoundException {
         /*
