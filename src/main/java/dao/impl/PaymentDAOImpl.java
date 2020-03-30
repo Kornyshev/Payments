@@ -6,6 +6,7 @@ import dao.interfaces.DAO;
 import dao.interfaces.PaymentDAO;
 import entities.Payment;
 import entities.PaymentType;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,8 +21,11 @@ public class PaymentDAOImpl implements PaymentDAO {
     private PreparedStatement st;
     private ResultSet rs;
 
+    private final static Logger logger = Logger.getLogger(PaymentDAOImpl.class);
+
     public PaymentDAOImpl() throws SQLException, LoginToMySQLException, ClassNotFoundException {
         conn = new MySQLConnectionFactory().createConnection();
+        logger.info("MySQL connection successfully created");
     }
 
     @Override
@@ -48,6 +52,7 @@ public class PaymentDAOImpl implements PaymentDAO {
         st.setLong(4, entity.destination);
         res += st.executeUpdate();
         DAO.closing(st, conn);
+        logger.info("Payment with the id = " + entity.id + " successfully inserted");
         return res;
     }
 
@@ -58,13 +63,14 @@ public class PaymentDAOImpl implements PaymentDAO {
         st.setInt(1, id);
         rs = st.executeQuery();
         while (rs.next()) {
-            payment.paymentId = rs.getInt("id");
+            payment.id = rs.getInt("id");
             payment.cardNumber = rs.getLong("card_number");
             payment.paymentType = PaymentType.valueOf(rs.getString("type"));
             payment.amount = rs.getInt("amount");
             payment.destination = rs.getLong("destination");
         }
         DAO.closing(rs, st, conn);
+        logger.info("Payment with the id = " + id + " successfully retrieved");
         return payment;
     }
 
@@ -82,11 +88,12 @@ public class PaymentDAOImpl implements PaymentDAO {
             payments.add(new Payment(id, cardNumber, type, amount, destination));
         }
         DAO.closing(rs, st, conn);
+        logger.info("List of all payments was retrieved");
         return payments;
     }
 
     @Override
-    public List<Payment> retrievePaymentsByCardNumber(long number) throws SQLException, ClassNotFoundException {
+    public List<Payment> retrievePaymentsByCardNumber(long number) throws SQLException {
         List<Payment> payments = new ArrayList<>();
         st = conn.prepareStatement("SELECT * FROM payments_project.payments WHERE card_number = ?;");
         st.setLong(1, number);
@@ -100,6 +107,7 @@ public class PaymentDAOImpl implements PaymentDAO {
             payments.add(new Payment(id, cardNumber, type, amount, destination));
         }
         DAO.closing(rs, st, conn);
+        logger.info("List of payments by credit card with number = " + number + " retrieved");
         return payments;
     }
 
@@ -112,20 +120,25 @@ public class PaymentDAOImpl implements PaymentDAO {
         clientDAO.retrieveClientsCardsByName(name).forEach(card -> {
             try {
                 payments.addAll(paymentDAO.retrievePaymentsByCardNumber(card.cardNumber));
-            } catch (SQLException | ClassNotFoundException e) {
+            } catch (SQLException e) {
+                logger.error(
+                        "Something wrong with retrieving payments by card number = " + card.cardNumber, e);
                 e.printStackTrace();
             }
         });
+        logger.info("List of payments by the client's name = " + name + " retrieved");
         return payments;
     }
 
     @Override
     public int update(Payment entity) throws SQLException {
+        logger.error("Someone has tried to update existed payment");
         throw new UnsupportedOperationException("Payment update is not allowed");
     }
 
     @Override
     public int delete(int id) throws SQLException, LoginToMySQLException, ClassNotFoundException {
+        logger.error("Someone has tried to delete existed payment");
         throw new UnsupportedOperationException("Payment delete is not allowed");
     }
 }

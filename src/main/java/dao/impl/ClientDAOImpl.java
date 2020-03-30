@@ -4,6 +4,7 @@ import dao.interfaces.ClientDAO;
 import dao.interfaces.DAO;
 import entities.Client;
 import entities.CreditCard;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,8 +20,11 @@ public class ClientDAOImpl implements ClientDAO {
     private PreparedStatement st;
     private ResultSet rs;
 
+    private static final Logger logger = Logger.getLogger(ClientDAOImpl.class);
+
     public ClientDAOImpl() throws SQLException, ClassNotFoundException, LoginToMySQLException {
         conn = new MySQLConnectionFactory().createConnection();
+        logger.info("MySQL connection successfully created");
     }
 
     @Override
@@ -31,6 +35,7 @@ public class ClientDAOImpl implements ClientDAO {
         st.setInt(3, entity.cardsQuantity);
         int res = st.executeUpdate();
         DAO.closing(st, conn);
+        logger.info("Client with the id = " + entity.id + " successfully inserted");
         return res;
     }
 
@@ -47,6 +52,7 @@ public class ClientDAOImpl implements ClientDAO {
             client.cardsQuantity = rs.getInt("cards_quantity");
         }
         DAO.closing(rs, st, conn);
+        logger.info("Client with the id = " + id + " successfully retrieved");
         return client;
     }
 
@@ -67,6 +73,7 @@ public class ClientDAOImpl implements ClientDAO {
             clients.add(new Client(id, name, birthDay, cardsQuantity));
         }
         DAO.closing(rs, st, conn);
+        logger.info("List of all clients was retrieved");
         return clients;
     }
 
@@ -83,6 +90,7 @@ public class ClientDAOImpl implements ClientDAO {
             client.cardsQuantity = rs.getInt("cards_quantity");
         }
         DAO.closing(rs, st, conn);
+        logger.info("Client with the name = " + name + " successfully inserted");
         return client;
     }
 
@@ -102,6 +110,7 @@ public class ClientDAOImpl implements ClientDAO {
             cards.add(new CreditCard(number, id, limit, balance, expiryDate));
         }
         DAO.closing(rs, st, conn);
+        logger.info("List of client's credit cards was retrieved by name - " + name);
         return cards;
     }
 
@@ -119,6 +128,7 @@ public class ClientDAOImpl implements ClientDAO {
             cards.add(new CreditCard(number, id, limit, balance, expiryDate));
         }
         DAO.closing(rs, st, conn);
+        logger.info("List of client's credit cards was retrieved by the id - " + id);
         return cards;
     }
 
@@ -133,6 +143,7 @@ public class ClientDAOImpl implements ClientDAO {
         st.setInt(5, entity.id);
         int res = st.executeUpdate();
         DAO.closing(st, conn);
+        logger.info("Client with the id = " + entity.id + " successfully updated");
         return res;
     }
 
@@ -150,6 +161,7 @@ public class ClientDAOImpl implements ClientDAO {
         st.setInt(2, clientID);
         int res = st.executeUpdate();
         DAO.closing(rs, st, conn);
+        logger.info("Client's cards quantity with the id = " + clientID + " successfully updated");
         return res;
     }
 
@@ -159,6 +171,7 @@ public class ClientDAOImpl implements ClientDAO {
         st.setInt(1, id);
         int res = st.executeUpdate();
         DAO.closing(st, conn);
+        logger.info("Client with the id = " + id + " successfully deleted (force method)");
         return res;
     }
 
@@ -168,11 +181,13 @@ public class ClientDAOImpl implements ClientDAO {
         st.setString(1, name);
         int res = st.executeUpdate();
         DAO.closing(st, conn);
+        logger.info("Client with the name = " + name + " successfully deleted (force method)");;
         return res;
     }
 
     @Override
-    public int clientDeletionWithCheckingByID(int id) throws SQLException, ClassNotFoundException, LoginToMySQLException {
+    public int clientDeletionWithCheckingByID(int id)
+            throws SQLException, ClassNotFoundException, LoginToMySQLException {
         ClientDAO clientDAO = new ClientDAOImpl();
         List<CreditCard> cards = clientDAO.retrieveClientsCardsByID(id);
         int balanceSum = cards.stream().mapToInt(card -> card.balance).sum();
@@ -181,11 +196,14 @@ public class ClientDAOImpl implements ClientDAO {
             return -1;
         } else {
             if (this.delete(id) > 0) {
+                logger.info("Client with the id = " + id + " successfully deleted (soft method)");
                 return balanceSum - limitSum;
             } else {
+                logger.error("Something wrong with the client [id] -> " + id);
                 throw new SQLException("Something wrong with the client [id] -> " + id);
             }
         }
+
     }
 
     @Override
@@ -199,8 +217,10 @@ public class ClientDAOImpl implements ClientDAO {
             return -1;
         } else {
             if (this.deleteClientByName(name) > 0) {
+                logger.info("Client with the name = " + name + " successfully deleted (soft method)");
                 return balanceSum - limitSum;
             } else {
+                logger.error("Something wrong with deletion of the client [name] -> " + name);
                 throw new SQLException("Something wrong with deletion of the client [name] -> " + name);
             }
         }

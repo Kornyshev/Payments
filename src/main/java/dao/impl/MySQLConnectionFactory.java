@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.interfaces.ConnectionFactory;
+import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,13 +19,16 @@ public class MySQLConnectionFactory implements ConnectionFactory {
                     "CompliantTimezoneShift=true&" +
                     "useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String MySQL_DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final Logger logger = Logger.getLogger(MySQLConnectionFactory.class);
     private static String USER;
     private static String PASSWORD;
 
     public Connection createConnection() throws ClassNotFoundException, SQLException, LoginToMySQLException {
         try {
             getLoginSettings();
+            logger.info("Login and password have gotten from file");
         } catch (IOException e) {
+            logger.error("Something wrong with access to the file", e);
             throw new LoginToMySQLException("Something wrong with access to file with login and passowrd", e);
         }
         Class.forName(MySQL_DRIVER);

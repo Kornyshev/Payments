@@ -4,6 +4,7 @@ import dao.interfaces.ClientDAO;
 import dao.interfaces.CreditCardDAO;
 import dao.interfaces.DAO;
 import entities.CreditCard;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,8 +19,11 @@ public class CreditCardDAOImpl implements CreditCardDAO {
     private PreparedStatement st;
     private ResultSet rs;
 
+    private final static Logger logger = Logger.getLogger(CreditCardDAOImpl.class);
+
     public CreditCardDAOImpl() throws SQLException, ClassNotFoundException, LoginToMySQLException {
         conn = new MySQLConnectionFactory().createConnection();
+        logger.info("MySQL connection successfully created");
     }
 
     @Override
@@ -35,6 +39,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
         int res = st.executeUpdate();
         clientDAO.updateClientsCardsQuantity(entity.clientID, 1);
         DAO.closing(st, conn);
+        logger.info("Credit card with the id = " + entity.id + " successfully inserted");
         return res;
     }
 
@@ -53,6 +58,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
             card.expiryDate = rs.getString("expiry_date");
         }
         DAO.closing(rs, st, conn);
+        logger.info("Credit card with the id = " + id + " successfully retrieved");
         return card;
     }
 
@@ -77,6 +83,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
             cards.add(new CreditCard(id, number, clientId, limit, balance, expiryDate));
         }
         DAO.closing(rs, st, conn);
+        logger.info("List of all credit cards was retrieved");
         return cards;
     }
 
@@ -96,6 +103,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
             expiryDate = rs.getString("expiry_date");
         }
         DAO.closing(rs, st, conn);
+        logger.info("Credit card with the number = " + number + " successfully retrieved");
         return new CreditCard(number, clientId, limit, balance, expiryDate);
     }
 
@@ -118,6 +126,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
             cards.add(new CreditCard(number, clientId, limit, balance, expiryDate));
         }
         DAO.closing(rs, st, conn);
+        logger.info("List of credit cards with expiry date = " + expiryDate + " retrieved");
         return cards;
     }
 
@@ -131,6 +140,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
             balance = rs.getInt("balance");
         }
         DAO.closing(rs, st, conn);
+        logger.info("Balance of credit card with number = " + number + " retrieved");
         return balance;
     }
 
@@ -147,6 +157,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
         st.setInt(7, entity.id);
         int res = st.executeUpdate();
         DAO.closing(st, conn);
+        logger.info("Credit card with the id = " + entity.id + " successfully updated");
         return res;
     }
 
@@ -157,6 +168,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
         st.setLong(2, number);
         int res = st.executeUpdate();
         DAO.closing(st, conn);
+        logger.info("Balance of credit card with the number = " + number + " successfully updated");
         return res;
     }
 
@@ -167,6 +179,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
         st.setLong(2, number);
         int res = st.executeUpdate();
         DAO.closing(st, conn);
+        logger.info("Credit limit of credit card with the number = " + number + " successfully updated");
         return res;
     }
 
@@ -179,6 +192,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
         CreditCardDAO cardDAO = new CreditCardDAOImpl();
         clientDAO.updateClientsCardsQuantity(cardDAO.retrieve(id).clientID, -1);
         DAO.closing(st, conn);
+        logger.info("Credit card with the id = " + id + " successfully deleted (force method)");
         return res;
     }
 
@@ -188,6 +202,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
         st.setLong(1, number);
         int res = st.executeUpdate();
         DAO.closing(st, conn);
+        logger.info("Credit card with the number = " + number + " successfully deleted (force method)");
         return res;
     }
 
@@ -200,8 +215,10 @@ public class CreditCardDAOImpl implements CreditCardDAO {
             return -1;
         } else {
             if (this.deleteCardByNumber(number) > 0) {
+                logger.info("Credit card with the number = " + number + " successfully deleted (soft method)");
                 return card.balance - card.creditLimit;
             } else {
+                logger.error("Something wrong with the credit card [number] -> " + number);
                 throw new SQLException("Something wrong with deletion of the card [number] -> " + number);
             }
         }

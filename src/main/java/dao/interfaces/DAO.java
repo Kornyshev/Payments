@@ -9,15 +9,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface DAO<T> {
-    /*
-    Задачи:
-    - обработать исключение при считывании логина и пароля
-    - вынести создание соединения во всех реализациях
-    - вынести закрытие ресурсов во всех реализациях
-    - настроить импорты в Идее, отрефакторить в проекте
-    - вынести общую функциональность в ДАО слое в этот интерфейс - CRUD
-    - попробовать убрать папки в gitignore
-     */
 
     int insert(T entity) throws SQLException, ClassNotFoundException, LoginToMySQLException;
     T retrieve(int id) throws SQLException;

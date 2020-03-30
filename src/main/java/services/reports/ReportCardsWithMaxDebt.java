@@ -1,8 +1,10 @@
 package services.reports;
 
 import dao.impl.CreditCardDAOImpl;
+import dao.impl.LoginToMySQLException;
 import dao.interfaces.CreditCardDAO;
 import entities.CreditCard;
+import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,12 +14,13 @@ import java.util.stream.Collectors;
 public class ReportCardsWithMaxDebt {
 
     private static final int CARDS_QUANTITY = 50;
+    private static final Logger logger = Logger.getLogger(ReportCardsWithMaxDebt.class);
 
     public List<CreditCard> getReport() {
-        CreditCardDAO cardDAO = new CreditCardDAOImpl();
         List<CreditCard> res = new ArrayList<>();
         try {
-            res = cardDAO.retrieveAllCards()
+            CreditCardDAO cardDAO = new CreditCardDAOImpl();
+            res = cardDAO.retrieveAll()
                     .stream()
                     .sorted((o1, o2) -> {
                 int debt1 = o1.creditLimit - o1.balance;
@@ -28,7 +31,9 @@ public class ReportCardsWithMaxDebt {
             })
                     .limit(CARDS_QUANTITY)
                     .collect(Collectors.toList());
-        } catch (SQLException | ClassNotFoundException e) {
+            logger.info("List of " + CARDS_QUANTITY + " credit cards with Max debt is generated");
+        } catch (SQLException | ClassNotFoundException | LoginToMySQLException e) {
+            logger.error("Something wrong with list of credit cards with Max debt", e);
             e.printStackTrace();
         }
         return res;

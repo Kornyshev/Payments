@@ -1,7 +1,9 @@
 package services.reports;
 
 import dao.impl.CreditCardDAOImpl;
+import dao.impl.LoginToMySQLException;
 import entities.CreditCard;
+import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -9,11 +11,15 @@ import java.util.stream.Collectors;
 
 public class ReportsAboutExpiryDate {
 
+    private final static Logger logger = Logger.getLogger(ReportsAboutExpiryDate.class);
+
     public List<CreditCard> getSoonExpiredCards(int months) {
         List<CreditCard> cards = new ArrayList<>();
         try {
-            cards = new CreditCardDAOImpl().retrieveAllCards();
-        } catch (SQLException | ClassNotFoundException e) {
+            cards = new CreditCardDAOImpl().retrieveAll();
+            logger.info("List of all credit cards is generated for filtering by Stream methods");
+        } catch (SQLException | ClassNotFoundException | LoginToMySQLException e) {
+            logger.error("Something wrong with retrieving all credit cards from DB", e);
             e.printStackTrace();
         }
         return cards.
@@ -25,8 +31,10 @@ public class ReportsAboutExpiryDate {
     public List<CreditCard> getAlreadyExpiredCards() {
         List<CreditCard> cards = new ArrayList<>();
         try {
-            cards = new CreditCardDAOImpl().retrieveAllCards();
-        } catch (SQLException | ClassNotFoundException e) {
+            cards = new CreditCardDAOImpl().retrieveAll();
+            logger.info("List of all credit cards is generated for filtering by Stream methods");
+        } catch (SQLException | ClassNotFoundException | LoginToMySQLException e) {
+            logger.error("Something wrong with retrieving all credit cards from DB", e);
             e.printStackTrace();
         }
         return cards.

@@ -1,6 +1,7 @@
 package utils;
 
 import dao.impl.CreditCardDAOImpl;
+import dao.impl.LoginToMySQLException;
 import dao.impl.PaymentDAOImpl;
 import dao.interfaces.CreditCardDAO;
 import dao.interfaces.PaymentDAO;
@@ -15,7 +16,7 @@ import java.util.Set;
 
 public class InsertionRndPaymentsToDB {
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, LoginToMySQLException {
         /*
         Method to action
          */
@@ -28,14 +29,14 @@ public class InsertionRndPaymentsToDB {
      * If this util method can`t insert payment to DB, it writes something to console.
      * @param payments
      */
-    private static void insertionPaymentsToDB(Set<Payment> payments) {
+    private static void insertionPaymentsToDB(Set<Payment> payments) throws SQLException, LoginToMySQLException, ClassNotFoundException {
         System.out.println(payments.size() + " <- set.size()");
         PaymentDAO paymentDAO = new PaymentDAOImpl();
         payments.forEach(payment -> {
             try {
-                int res = paymentDAO.insertPayment(payment);
+                int res = paymentDAO.insert(payment);
                 if (res == -1) System.out.println("Something wrong");
-            } catch (SQLException | ClassNotFoundException e) {
+            } catch (SQLException | ClassNotFoundException | LoginToMySQLException e) {
                 e.printStackTrace();
             }
         });
@@ -47,11 +48,11 @@ public class InsertionRndPaymentsToDB {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-    private static Set<Payment> generateRandomPayments() throws SQLException, ClassNotFoundException {
+    private static Set<Payment> generateRandomPayments() throws SQLException, ClassNotFoundException, LoginToMySQLException {
         Set<Payment> payments = new HashSet<>();
         Set<Long> cardNumbers = new HashSet<>();
         CreditCardDAO creditCardDAO = new CreditCardDAOImpl();
-        creditCardDAO.retrieveAllCards()
+        creditCardDAO.retrieveAll()
                 .forEach(card -> cardNumbers.add(card.cardNumber));
         for (Long number : cardNumbers) {
             int rnd = (int) (Math.random() * 10) + 1;
