@@ -61,4 +61,13 @@ public class Payment {
                 ", destination=" + destination +
                 ']';
     }
+
+    public String toFormattedString() {
+        return "Payment " +
+                String.format("%-7d", id) +
+                String.format("%-20d", cardNumber) +
+                String.format("%-20s", paymentType.toString()) +
+                String.format("%-9d", amount) +
+                String.format("%-20d", destination);
+    }
 }

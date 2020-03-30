@@ -28,7 +28,7 @@ public class ReportsAboutExpiryDate {
                 collect(Collectors.toList());
     }
 
-    public List<CreditCard> getAlreadyExpiredCards() {
+    private List<CreditCard> getAlreadyExpiredCards() {
         List<CreditCard> cards = new ArrayList<>();
         try {
             cards = new CreditCardDAOImpl().retrieveAll();

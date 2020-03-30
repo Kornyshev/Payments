@@ -55,4 +55,12 @@ public class Client {
                 ", birthday = " + birthDay +
                 ", cards quantity = " + cardsQuantity + "]";
     }
+
+    public String toFormattedString() {
+        return "Client " +
+                String.format("%-5d", id) +
+                String.format("%-25s", name) +
+                String.format("%-15s", birthDay) +
+                String.format("%-3d", cardsQuantity);
+    }
 }

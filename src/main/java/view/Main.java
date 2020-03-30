@@ -1,14 +1,19 @@
 package view;
 
-import dao.impl.LoginToMySQLException;
-import services.reports.ReportCardsWithMaxDebt;
-import services.reports.ReportsByTables;
-
-import java.sql.SQLException;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws SQLException, LoginToMySQLException, ClassNotFoundException {
-        ReportCardsWithMaxDebt cardsWithMaxDebt = new ReportCardsWithMaxDebt();
-        cardsWithMaxDebt.getReport().forEach(System.out::println);
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String query = sc.nextLine();
+        while (!query.equals("exit")) {
+            executeQuery(query);
+            query = sc.nextLine();
+        }
+        sc.close();
+    }
+
+    private static void executeQuery(String query) {
+        System.out.println("Some process " + query);
     }
 }

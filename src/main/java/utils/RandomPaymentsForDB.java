@@ -29,7 +29,8 @@ public class RandomPaymentsForDB {
      * If this util method can`t insert payment to DB, it writes something to console.
      * @param payments
      */
-    private static void insertionPaymentsToDB(Set<Payment> payments) throws SQLException, LoginToMySQLException, ClassNotFoundException {
+    private static void insertionPaymentsToDB(Set<Payment> payments)
+            throws SQLException, LoginToMySQLException, ClassNotFoundException {
         System.out.println(payments.size() + " <- set.size()");
         PaymentDAO paymentDAO = new PaymentDAOImpl();
         payments.forEach(payment -> {
@@ -48,7 +49,8 @@ public class RandomPaymentsForDB {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-    private static Set<Payment> generateRandomPayments() throws SQLException, ClassNotFoundException, LoginToMySQLException {
+    private static Set<Payment> generateRandomPayments()
+            throws SQLException, ClassNotFoundException, LoginToMySQLException {
         Set<Payment> payments = new HashSet<>();
         Set<Long> cardNumbers = new HashSet<>();
         CreditCardDAO creditCardDAO = new CreditCardDAOImpl();

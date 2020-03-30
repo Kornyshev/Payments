@@ -58,4 +58,14 @@ public class CreditCard {
                 ", limit = " + creditLimit + ", balance = " + balance +
                 ", expiry date = " + expiryDate + "]";
     }
+
+    public String toFormattedString() {
+        return "CreditCard " +
+                String.format("%-6d", id) +
+                String.format("%-20s", cardNumber) +
+                String.format("%-5d", clientID) +
+                String.format("%-9d", creditLimit) +
+                String.format("%-9d", balance) +
+                String.format("%-9s", expiryDate);
+    }
 }
