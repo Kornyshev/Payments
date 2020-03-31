@@ -1,6 +1,6 @@
 package services.reports;
 
-import dao.impl.CreditCardDAOImpl;
+import dao.impl.CardDAOImpl;
 import dao.impl.LoginToMySQLException;
 import dao.interfaces.CreditCardDAO;
 import entities.CreditCard;
@@ -19,7 +19,7 @@ public class ReportCardsWithMaxDebt {
     public List<CreditCard> getReport() {
         List<CreditCard> res = new ArrayList<>();
         try {
-            CreditCardDAO cardDAO = new CreditCardDAOImpl();
+            CreditCardDAO cardDAO = new CardDAOImpl();
             res = cardDAO.retrieveAll()
                     .stream()
                     .sorted((o1, o2) -> {

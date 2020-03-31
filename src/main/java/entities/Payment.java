@@ -1,6 +1,6 @@
 package entities;
 
-public class Payment {
+public class Payment extends Entity {
     public int id;
     public long cardNumber;
     public PaymentType paymentType;
@@ -12,7 +12,7 @@ public class Payment {
         this.destination = 0L;
     }
 
-    public Payment(long cardNumber, PaymentType paymentType, int amount, int destination) {
+    public Payment(long cardNumber, PaymentType paymentType, int amount, long destination) {
         this.cardNumber = cardNumber;
         this.paymentType = paymentType;
         this.amount = amount;
@@ -62,6 +62,7 @@ public class Payment {
                 ']';
     }
 
+    @Override
     public String toFormattedString() {
         return "Payment " +
                 String.format("%-7d", id) +
@@ -69,5 +70,15 @@ public class Payment {
                 String.format("%-20s", paymentType.toString()) +
                 String.format("%-9d", amount) +
                 String.format("%-20d", destination);
+    }
+
+    @Override
+    public String headerForTable() {
+        return "        " +
+                String.format("%-7s", "ID") +
+                String.format("%-20s", "Card number") +
+                String.format("%-20s", "Type") +
+                String.format("%-9s", "Amount") +
+                String.format("%-20s", "Destination");
     }
 }

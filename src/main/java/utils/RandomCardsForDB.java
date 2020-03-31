@@ -1,7 +1,7 @@
 package utils;
 
 import dao.impl.ClientDAOImpl;
-import dao.impl.CreditCardDAOImpl;
+import dao.impl.CardDAOImpl;
 import dao.impl.LoginToMySQLException;
 import dao.interfaces.ClientDAO;
 import dao.interfaces.CreditCardDAO;
@@ -26,7 +26,7 @@ public class RandomCardsForDB {
      * @param cards
      */
     private static void insertionCardsSetIntoDB(Set<CreditCard> cards) throws SQLException, LoginToMySQLException, ClassNotFoundException {
-        CreditCardDAO clientDAO = new CreditCardDAOImpl();
+        CreditCardDAO clientDAO = new CardDAOImpl();
         cards.forEach(card -> {
             try {
                 clientDAO.insert(card);

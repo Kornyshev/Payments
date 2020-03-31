@@ -1,7 +1,7 @@
 package services.reports;
 
 import dao.impl.ClientDAOImpl;
-import dao.impl.CreditCardDAOImpl;
+import dao.impl.CardDAOImpl;
 import dao.impl.LoginToMySQLException;
 import dao.impl.PaymentDAOImpl;
 import entities.Client;
@@ -23,7 +23,7 @@ public class ReportsByTables {
 
     public List<CreditCard> getAllCards() throws SQLException, ClassNotFoundException, LoginToMySQLException {
         logger.info("Method ReportsByTable.getAllCards() was called");
-        return new CreditCardDAOImpl().retrieveAll();
+        return new CardDAOImpl().retrieveAll();
     }
 
     public List<Payment> getAllPayments() throws SQLException, ClassNotFoundException, LoginToMySQLException {

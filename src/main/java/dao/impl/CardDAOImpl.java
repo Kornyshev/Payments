@@ -13,15 +13,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreditCardDAOImpl implements CreditCardDAO {
+public class CardDAOImpl implements CreditCardDAO {
 
     private Connection conn;
     private PreparedStatement st;
     private ResultSet rs;
 
-    private final static Logger logger = Logger.getLogger(CreditCardDAOImpl.class);
+    private final static Logger logger = Logger.getLogger(CardDAOImpl.class);
 
-    public CreditCardDAOImpl() throws SQLException, ClassNotFoundException, LoginToMySQLException {
+    public CardDAOImpl() throws SQLException, ClassNotFoundException, LoginToMySQLException {
         conn = new MySQLConnectionFactory().createConnection();
         logger.info("MySQL connection successfully created");
     }
@@ -37,7 +37,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
         st.setInt(4, entity.balance);
         st.setString(5, entity.expiryDate);
         int res = st.executeUpdate();
-        clientDAO.updateClientsCardsQuantity(entity.clientID, 1);
+        res += clientDAO.updateClientsCardsQuantity(entity.clientID, 1);
         DAO.closing(st, conn);
         logger.info("Credit card with the id = " + entity.id + " successfully inserted");
         return res;
@@ -189,7 +189,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
         st.setInt(1, id);
         int res = st.executeUpdate();
         ClientDAO clientDAO = new ClientDAOImpl();
-        CreditCardDAO cardDAO = new CreditCardDAOImpl();
+        CreditCardDAO cardDAO = new CardDAOImpl();
         clientDAO.updateClientsCardsQuantity(cardDAO.retrieve(id).clientID, -1);
         DAO.closing(st, conn);
         logger.info("Credit card with the id = " + id + " successfully deleted (force method)");
@@ -202,7 +202,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
         st.setLong(1, number);
         int res = st.executeUpdate();
         ClientDAO clientDAO = new ClientDAOImpl();
-        CreditCardDAO cardDAO = new CreditCardDAOImpl();
+        CreditCardDAO cardDAO = new CardDAOImpl();
         clientDAO.updateClientsCardsQuantity
                 (cardDAO.retrieveCardByNumber(number).clientID, -1);
         DAO.closing(st, conn);
@@ -213,12 +213,13 @@ public class CreditCardDAOImpl implements CreditCardDAO {
     @Override
     public int cardDeletionWithCheckingByNumber(long number)
             throws SQLException, ClassNotFoundException, LoginToMySQLException {
-        CreditCardDAO cardDAO = new CreditCardDAOImpl();
-        CreditCard card = cardDAO.retrieveCardByNumber(number);
+        CreditCardDAO cardDAOFirst = new CardDAOImpl();
+        CreditCard card = cardDAOFirst.retrieveCardByNumber(number);
         if (card.creditLimit > card.balance) {
             return -1;
         } else {
-            if (this.deleteCardByNumber(number) > 0) {
+            CreditCardDAO cardDAOSecond = new CardDAOImpl();
+            if (cardDAOSecond.deleteCardByNumber(number) > 0) {
                 logger.info("Credit card with the number = " + number + " successfully deleted (soft method)");
                 return card.balance - card.creditLimit;
             } else {

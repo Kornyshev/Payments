@@ -1,6 +1,6 @@
 package services.actions;
 
-import dao.impl.CreditCardDAOImpl;
+import dao.impl.CardDAOImpl;
 import dao.impl.LoginToMySQLException;
 import dao.interfaces.CreditCardDAO;
 import org.apache.log4j.Logger;
@@ -14,7 +14,7 @@ public class CloseCardByNumber {
     public int closeCard(long number) {
         int res = -1;
         try {
-            CreditCardDAO cardDAO = new CreditCardDAOImpl();
+            CreditCardDAO cardDAO = new CardDAOImpl();
             res = cardDAO.cardDeletionWithCheckingByNumber(number);
             if (res != -1) {
                 logger.info("Credit cards with number = " + number + " deleted and result calculated");

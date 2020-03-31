@@ -1,6 +1,6 @@
 package services.actions;
 
-import dao.impl.CreditCardDAOImpl;
+import dao.impl.CardDAOImpl;
 import dao.impl.LoginToMySQLException;
 import dao.interfaces.CreditCardDAO;
 import entities.CreditCard;
@@ -19,9 +19,9 @@ public class OpenNewCardToClient {
     public int openNewCreditCard(int clientId, int creditLimit, int balance) {
         CreditCard card = new CreditCard();
         List<Long> numbers = new ArrayList<>();
-        int res;
+        int res = 0;
         try {
-            CreditCardDAO cardDAO = new CreditCardDAOImpl();
+            CreditCardDAO cardDAO = new CardDAOImpl();
             cardDAO.retrieveAll().forEach(c -> numbers.add(c.cardNumber));
             long number = generateNumber();
             while (numbers.contains(number)) {

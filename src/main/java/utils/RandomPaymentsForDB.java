@@ -1,6 +1,6 @@
 package utils;
 
-import dao.impl.CreditCardDAOImpl;
+import dao.impl.CardDAOImpl;
 import dao.impl.LoginToMySQLException;
 import dao.impl.PaymentDAOImpl;
 import dao.interfaces.CreditCardDAO;
@@ -53,7 +53,7 @@ public class RandomPaymentsForDB {
             throws SQLException, ClassNotFoundException, LoginToMySQLException {
         Set<Payment> payments = new HashSet<>();
         Set<Long> cardNumbers = new HashSet<>();
-        CreditCardDAO creditCardDAO = new CreditCardDAOImpl();
+        CreditCardDAO creditCardDAO = new CardDAOImpl();
         creditCardDAO.retrieveAll()
                 .forEach(card -> cardNumbers.add(card.cardNumber));
         for (Long number : cardNumbers) {

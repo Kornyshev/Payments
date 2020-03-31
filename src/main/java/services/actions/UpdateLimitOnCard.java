@@ -1,6 +1,6 @@
 package services.actions;
 
-import dao.impl.CreditCardDAOImpl;
+import dao.impl.CardDAOImpl;
 import dao.impl.LoginToMySQLException;
 import dao.interfaces.CreditCardDAO;
 import org.apache.log4j.Logger;
@@ -14,7 +14,7 @@ public class UpdateLimitOnCard {
     public int updateLimit(long number, int newLimit) {
         int res = 0;
         try {
-            CreditCardDAO cardDAO = new CreditCardDAOImpl();
+            CreditCardDAO cardDAO = new CardDAOImpl();
             res = cardDAO.updateCreditLimitByNumber(number, newLimit);
             if (res == 1) {
                 logger.info("Credit limit on the card with number = " + number + " updated");

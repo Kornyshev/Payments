@@ -1,6 +1,6 @@
 package entities;
 
-public class Client {
+public class Client extends Entity {
     public int id;
     public String name;
     public String birthDay;
@@ -56,11 +56,21 @@ public class Client {
                 ", cards quantity = " + cardsQuantity + "]";
     }
 
+    @Override
     public String toFormattedString() {
         return "Client " +
                 String.format("%-5d", id) +
                 String.format("%-25s", name) +
                 String.format("%-15s", birthDay) +
                 String.format("%-3d", cardsQuantity);
+    }
+
+    @Override
+    public String headerForTable() {
+        return "       " +
+                String.format("%-5s", "ID") +
+                String.format("%-25s", "Name") +
+                String.format("%-15s", "Birthday") +
+                String.format("%-5s", "Cards");
     }
 }

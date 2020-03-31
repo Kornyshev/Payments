@@ -13,14 +13,14 @@ public class MakePaymentByCard {
 
     private final static Logger logger = Logger.getLogger(MakePaymentByCard.class);
 
-    public int makePayment(int id, long number, PaymentType type, int amount, long destination) {
-        Payment payment = new Payment(id, number, type, amount, destination);
+    public int makePayment(long number, PaymentType type, int amount, long destination) {
+        Payment payment = new Payment(number, type, amount, destination);
         int res = 0;
         try {
             PaymentDAO paymentDAO = new PaymentDAOImpl();
             res = paymentDAO.insert(payment);
             if (res != -1) {
-                logger.info("Payment with id = " + id + " successfully inserted");
+                logger.info("New payment with the card's number = " + number + " successfully inserted");
             } else {
                 logger.error("Payment is impossible, check the parameters");
             }

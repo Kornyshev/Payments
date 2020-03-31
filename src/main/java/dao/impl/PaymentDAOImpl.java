@@ -31,19 +31,18 @@ public class PaymentDAOImpl implements PaymentDAO {
     @Override
     public int insert(Payment entity) throws SQLException, ClassNotFoundException, LoginToMySQLException {
         int res = 0;
-        CreditCardDAO creditCardDAO = new CreditCardDAOImpl();
-        int currentCardBalance = creditCardDAO.retrieveCardBalanceByNumber(entity.cardNumber);
+        int currentCardBalance = new CardDAOImpl().retrieveCardBalanceByNumber(entity.cardNumber);
         if (currentCardBalance < entity.amount) {
             System.err.println("Payment is not possible!!!");
             return -1;
         }
         if (entity.paymentType.equals(PaymentType.TRANSFER)) {
-            int destinationBalance = creditCardDAO.retrieveCardBalanceByNumber(entity.destination);
+            int destinationBalance = new CardDAOImpl().retrieveCardBalanceByNumber(entity.destination);
             destinationBalance += entity.amount;
-            res += creditCardDAO.updateCardBalanceByNumber(entity.destination, destinationBalance);
+            res += new CardDAOImpl().updateCardBalanceByNumber(entity.destination, destinationBalance);
         }
         currentCardBalance -= entity.amount;
-        res += creditCardDAO.updateCardBalanceByNumber(entity.cardNumber, currentCardBalance);
+        res += new CardDAOImpl().updateCardBalanceByNumber(entity.cardNumber, currentCardBalance);
         st = conn.prepareStatement("INSERT INTO `payments_project`.`payments`" +
                 "(`card_number`,`type`,`amount`,`destination`) VALUES (?,?,?,?);");
         st.setLong(1, entity.cardNumber);
@@ -116,11 +115,10 @@ public class PaymentDAOImpl implements PaymentDAO {
             throws SQLException, ClassNotFoundException, LoginToMySQLException {
         List<Payment> payments = new ArrayList<>();
         ClientDAO clientDAO = new ClientDAOImpl();
-        PaymentDAO paymentDAO = new PaymentDAOImpl();
         clientDAO.retrieveClientsCardsByName(name).forEach(card -> {
             try {
-                payments.addAll(paymentDAO.retrievePaymentsByCardNumber(card.cardNumber));
-            } catch (SQLException e) {
+                payments.addAll(new PaymentDAOImpl().retrievePaymentsByCardNumber(card.cardNumber));
+            } catch (SQLException | LoginToMySQLException | ClassNotFoundException e) {
                 logger.error(
                         "Something wrong with retrieving payments by card number = " + card.cardNumber, e);
                 e.printStackTrace();

@@ -1,6 +1,6 @@
 package entities;
 
-public class CreditCard {
+public class CreditCard extends Entity {
     public int id;
     public long cardNumber;
     public int clientID;
@@ -59,13 +59,25 @@ public class CreditCard {
                 ", expiry date = " + expiryDate + "]";
     }
 
+    @Override
     public String toFormattedString() {
         return "CreditCard " +
                 String.format("%-6d", id) +
                 String.format("%-20s", cardNumber) +
-                String.format("%-5d", clientID) +
+                String.format("%-8d", clientID) +
                 String.format("%-9d", creditLimit) +
                 String.format("%-9d", balance) +
                 String.format("%-9s", expiryDate);
+    }
+
+    @Override
+    public String headerForTable() {
+        return "           " +
+                String.format("%-6s", "ID") +
+                String.format("%-20s", "Number") +
+                String.format("%-8s", "Cl. ID") +
+                String.format("%-9s", "Limit") +
+                String.format("%-9s", "Balance") +
+                String.format("%-9s", "Expiry");
     }
 }
