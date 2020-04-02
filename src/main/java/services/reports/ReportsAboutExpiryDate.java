@@ -2,7 +2,7 @@ package services.reports;
 
 import dao.impl.CardDAOImpl;
 import dao.impl.LoginToMySQLException;
-import entities.CreditCard;
+import entities.Card;
 import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
@@ -13,8 +13,8 @@ public class ReportsAboutExpiryDate {
 
     private final static Logger logger = Logger.getLogger(ReportsAboutExpiryDate.class);
 
-    public List<CreditCard> getSoonExpiredCards(int months) {
-        List<CreditCard> cards = new ArrayList<>();
+    public List<Card> getSoonExpiredCards(int months) {
+        List<Card> cards = new ArrayList<>();
         try {
             cards = new CardDAOImpl().retrieveAll();
             logger.info("List of all credit cards is generated for filtering by Stream methods");
@@ -28,8 +28,8 @@ public class ReportsAboutExpiryDate {
                 collect(Collectors.toList());
     }
 
-    public List<CreditCard> getAlreadyExpiredCards() {
-        List<CreditCard> cards = new ArrayList<>();
+    public List<Card> getAlreadyExpiredCards() {
+        List<Card> cards = new ArrayList<>();
         try {
             cards = new CardDAOImpl().retrieveAll();
             logger.info("List of all credit cards is generated for filtering by Stream methods");

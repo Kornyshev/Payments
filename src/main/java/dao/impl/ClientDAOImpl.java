@@ -3,7 +3,7 @@ package dao.impl;
 import dao.interfaces.ClientDAO;
 import dao.interfaces.DAO;
 import entities.Client;
-import entities.CreditCard;
+import entities.Card;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -41,18 +41,23 @@ public class ClientDAOImpl implements ClientDAO {
 
     @Override
     public Client retrieve(int id) throws SQLException {
-        Client client = new Client();
+        Client client = null;
         st = conn.prepareStatement("SELECT * FROM payments_project.clients WHERE id = ?;");
         st.setInt(1, id);
         rs = st.executeQuery();
         while (rs.next()) {
+            client = new Client();
             client.id = rs.getInt("id");
             client.name = rs.getString("name");
             client.birthDay = rs.getString("birthday");
             client.cardsQuantity = rs.getInt("cards_quantity");
         }
         DAO.closing(rs, st, conn);
-        logger.info("Client with the id = " + id + " successfully retrieved");
+        if (client == null) {
+            logger.error("Something wrong with retrieving client by id - " + id);
+        } else {
+            logger.info("Client with the id = " + id + " successfully retrieved");
+        }
         return client;
     }
 
@@ -73,30 +78,35 @@ public class ClientDAOImpl implements ClientDAO {
             clients.add(new Client(id, name, birthDay, cardsQuantity));
         }
         DAO.closing(rs, st, conn);
-        logger.info("List of all clients was retrieved");
+        logger.info("List of all clients was retrieved, size = " + clients.size());
         return clients;
     }
 
     @Override
     public Client retrieveClientByName(String name) throws SQLException {
-        Client client = new Client();
+        Client client = null;
         st = conn.prepareStatement("SELECT * FROM payments_project.clients WHERE name = ?;");
         st.setString(1, name);
         rs = st.executeQuery();
         while (rs.next()) {
+            client = new Client();
             client.id = rs.getInt("id");
             client.name = name;
             client.birthDay = rs.getString("birthday");
             client.cardsQuantity = rs.getInt("cards_quantity");
         }
         DAO.closing(rs, st, conn);
-        logger.info("Client with the name = " + name + " successfully inserted");
+        if (client == null) {
+            logger.error("Something wrong with retrieving client by name - " + name);
+        } else {
+            logger.info("Client with the name = " + name + " successfully retrieved");
+        }
         return client;
     }
 
     @Override
-    public List<CreditCard> retrieveClientsCardsByName(String name) throws SQLException {
-        List<CreditCard> cards = new ArrayList<>();
+    public List<Card> retrieveClientsCardsByName(String name) throws SQLException {
+        List<Card> cards = new ArrayList<>();
         st = conn.prepareStatement("SELECT * FROM payments_project.credit_cards WHERE client_id = " +
                 "(SELECT id FROM payments_project.clients WHERE name = ?);");
         st.setString(1, name);
@@ -107,16 +117,17 @@ public class ClientDAOImpl implements ClientDAO {
             int limit = rs.getInt("limit");
             int balance = rs.getInt("balance");
             String expiryDate = rs.getString("expiry_date");
-            cards.add(new CreditCard(number, id, limit, balance, expiryDate));
+            cards.add(new Card(number, id, limit, balance, expiryDate));
         }
         DAO.closing(rs, st, conn);
-        logger.info("List of client's credit cards was retrieved by name - " + name);
+        logger.info("List of client's credit cards was retrieved by name - " + name + ", " +
+                "list's size = " + cards.size());
         return cards;
     }
 
     @Override
-    public List<CreditCard> retrieveClientsCardsByID(int id) throws SQLException {
-        List<CreditCard> cards = new ArrayList<>();
+    public List<Card> retrieveClientsCardsByID(int id) throws SQLException {
+        List<Card> cards = new ArrayList<>();
         st = conn.prepareStatement("SELECT * FROM payments_project.credit_cards WHERE client_id = ?;");
         st.setInt(1, id);
         rs = st.executeQuery();
@@ -125,10 +136,11 @@ public class ClientDAOImpl implements ClientDAO {
             int limit = rs.getInt("limit");
             int balance = rs.getInt("balance");
             String expiryDate = rs.getString("expiry_date");
-            cards.add(new CreditCard(number, id, limit, balance, expiryDate));
+            cards.add(new Card(number, id, limit, balance, expiryDate));
         }
         DAO.closing(rs, st, conn);
-        logger.info("List of client's credit cards was retrieved by the id - " + id);
+        logger.info("List of client's credit cards was retrieved by the id - " + id + ", " +
+                "list's size = " + cards.size());
         return cards;
     }
 
@@ -143,7 +155,11 @@ public class ClientDAOImpl implements ClientDAO {
         st.setInt(5, entity.id);
         int res = st.executeUpdate();
         DAO.closing(st, conn);
-        logger.info("Client with the id = " + entity.id + " successfully updated");
+        if (res == 0) {
+            logger.error("Something wrong with updating client - " + entity);
+        } else {
+            logger.info("Client with the id = " + entity.id + " successfully updated");
+        }
         return res;
     }
 
@@ -161,7 +177,11 @@ public class ClientDAOImpl implements ClientDAO {
         st.setInt(2, clientID);
         int res = st.executeUpdate();
         DAO.closing(rs, st, conn);
-        logger.info("Client's cards quantity with the id = " + clientID + " successfully updated");
+        if (res == 0) {
+            logger.error("Something wrong with updating client's card, client ID - " + clientID);
+        } else {
+            logger.info("Client's cards quantity with the id = " + clientID + " successfully updated");
+        }
         return res;
     }
 
@@ -171,7 +191,11 @@ public class ClientDAOImpl implements ClientDAO {
         st.setInt(1, id);
         int res = st.executeUpdate();
         DAO.closing(st, conn);
-        logger.info("Client with the id = " + id + " successfully deleted (force method)");
+        if (res == 0) {
+            logger.error("Something wrong with deletion client by id - " + id);
+        } else {
+            logger.info("Client with the id = " + id + " successfully deleted (force method)");
+        }
         return res;
     }
 
@@ -181,7 +205,11 @@ public class ClientDAOImpl implements ClientDAO {
         st.setString(1, name);
         int res = st.executeUpdate();
         DAO.closing(st, conn);
-        logger.info("Client with the name = " + name + " successfully deleted (force method)");;
+        if (res == 0) {
+            logger.error("Something wrong with deletion client by name - " + name);
+        } else {
+            logger.info("Client with the name = " + name + " successfully deleted (force method)");;
+        }
         return res;
     }
 
@@ -189,7 +217,7 @@ public class ClientDAOImpl implements ClientDAO {
     public int clientDeletionWithCheckingByID(int id)
             throws SQLException, ClassNotFoundException, LoginToMySQLException {
         ClientDAO clientDAO = new ClientDAOImpl();
-        List<CreditCard> cards = clientDAO.retrieveClientsCardsByID(id);
+        List<Card> cards = clientDAO.retrieveClientsCardsByID(id);
         int balanceSum = cards.stream().mapToInt(card -> card.balance).sum();
         int limitSum = cards.stream().mapToInt(card -> card.creditLimit).sum();
         if (limitSum > balanceSum) {
@@ -210,7 +238,7 @@ public class ClientDAOImpl implements ClientDAO {
     public int clientDeletionWithCheckingByName(String name)
             throws SQLException, ClassNotFoundException, LoginToMySQLException {
         ClientDAO clientDAO = new ClientDAOImpl();
-        List<CreditCard> cards = clientDAO.retrieveClientsCardsByName(name);
+        List<Card> cards = clientDAO.retrieveClientsCardsByName(name);
         int balanceSum = cards.stream().mapToInt(card -> card.balance).sum();
         int limitSum = cards.stream().mapToInt(card -> card.creditLimit).sum();
         if (limitSum > balanceSum) {

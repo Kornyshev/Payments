@@ -1,6 +1,6 @@
 package entities;
 
-public class CreditCard extends Entity {
+public class Card extends Entity {
     public int id;
     public long cardNumber;
     public int clientID;
@@ -8,10 +8,10 @@ public class CreditCard extends Entity {
     public int balance;
     public String expiryDate;
 
-    public CreditCard() {
+    public Card() {
     }
 
-    public CreditCard(long cardNumber, int clientID, int creditLimit, int balance, String expiryDate) {
+    public Card(long cardNumber, int clientID, int creditLimit, int balance, String expiryDate) {
         this.cardNumber = cardNumber;
         this.clientID = clientID;
         this.creditLimit = creditLimit;
@@ -19,7 +19,7 @@ public class CreditCard extends Entity {
         this.expiryDate = expiryDate;
     }
 
-    public CreditCard(int id, long cardNumber, int clientID, int creditLimit, int balance, String expiryDate) {
+    public Card(int id, long cardNumber, int clientID, int creditLimit, int balance, String expiryDate) {
         this.id = id;
         this.cardNumber = cardNumber;
         this.clientID = clientID;
@@ -33,7 +33,7 @@ public class CreditCard extends Entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CreditCard that = (CreditCard) o;
+        Card that = (Card) o;
 
         if (cardNumber != that.cardNumber) return false;
         if (clientID != that.clientID) return false;

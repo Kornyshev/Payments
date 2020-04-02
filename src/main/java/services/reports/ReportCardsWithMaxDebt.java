@@ -2,8 +2,8 @@ package services.reports;
 
 import dao.impl.CardDAOImpl;
 import dao.impl.LoginToMySQLException;
-import dao.interfaces.CreditCardDAO;
-import entities.CreditCard;
+import dao.interfaces.CardDAO;
+import entities.Card;
 import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
@@ -16,10 +16,10 @@ public class ReportCardsWithMaxDebt {
     private static final int CARDS_QUANTITY = 50;
     private static final Logger logger = Logger.getLogger(ReportCardsWithMaxDebt.class);
 
-    public List<CreditCard> getReport() {
-        List<CreditCard> res = new ArrayList<>();
+    public List<Card> getReport() {
+        List<Card> res = new ArrayList<>();
         try {
-            CreditCardDAO cardDAO = new CardDAOImpl();
+            CardDAO cardDAO = new CardDAOImpl();
             res = cardDAO.retrieveAll()
                     .stream()
                     .sorted((o1, o2) -> {

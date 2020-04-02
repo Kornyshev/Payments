@@ -12,14 +12,18 @@ import java.sql.SQLException;
 public class MakePaymentByCard {
 
     private final static Logger logger = Logger.getLogger(MakePaymentByCard.class);
+    private PaymentDAO paymentDAO = new PaymentDAOImpl();
+
+    public MakePaymentByCard()
+            throws SQLException, LoginToMySQLException, ClassNotFoundException {
+    }
 
     public int makePayment(long number, PaymentType type, int amount, long destination) {
         Payment payment = new Payment(number, type, amount, destination);
         int res = 0;
         try {
-            PaymentDAO paymentDAO = new PaymentDAOImpl();
             res = paymentDAO.insert(payment);
-            if (res != -1) {
+            if (res > 0) {
                 logger.info("New payment with the card's number = " + number + " successfully inserted");
             } else {
                 logger.error("Payment is impossible, check the parameters");

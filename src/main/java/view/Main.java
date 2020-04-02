@@ -1,8 +1,8 @@
 package view;
 
-import dao.impl.LoginToMySQLException;
+import dao.impl.*;
 import entities.Client;
-import entities.CreditCard;
+import entities.Card;
 import entities.Payment;
 import entities.PaymentType;
 import org.apache.log4j.Logger;
@@ -22,7 +22,7 @@ public class Main {
     private static final Scanner sc = new Scanner(System.in);
     private static final Logger logger = Logger.getLogger(Main.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, LoginToMySQLException, ClassNotFoundException {
         hintsForCLI();
         String query = sc.nextLine();
         while (!query.equals("exit")) {
@@ -42,7 +42,7 @@ public class Main {
                 "'make payment', 'open card', 'update card limit'");
     }
 
-    private static void executeQuery(String query) {
+    private static void executeQuery(String query) throws SQLException, LoginToMySQLException, ClassNotFoundException {
         if (query.equals("report")) {
             handlingReportQuery(sc.nextLine());
         } else if (query.equals("action")) {
@@ -53,7 +53,7 @@ public class Main {
     }
 
     private static void handlingReportQuery(String query) {
-        TablePrinter<CreditCard> cardTablePrinter = new TablePrinter<>();
+        TablePrinter<Card> cardTablePrinter = new TablePrinter<>();
         TablePrinter<Payment> paymentTablePrinter = new TablePrinter<>();
         ReportCardsByClientName cardsByClientNameReport = new ReportCardsByClientName();
         ReportCardsWithMaxDebt cardsWithMaxDebtReport = new ReportCardsWithMaxDebt();
@@ -81,7 +81,7 @@ public class Main {
             case "cards by name":
                 System.out.println("Type the client's name:");
                 String name = sc.nextLine();
-                List<CreditCard> cardsOfClient = cardsByClientNameReport.getReport(name);
+                List<Card> cardsOfClient = cardsByClientNameReport.getReport(name);
                 if (cardsOfClient.isEmpty()) {
                     System.err.println("List of credit cards is empty! Something wrong!");
                     logger.error("Something wrong with printing cards of client = " + name);
@@ -93,7 +93,7 @@ public class Main {
 
             case "cards with max debt":
                 System.out.println("Ok, one second...");
-                List<CreditCard> cardsMaxDebt = cardsWithMaxDebtReport.getReport();
+                List<Card> cardsMaxDebt = cardsWithMaxDebtReport.getReport();
                 if (cardsMaxDebt.isEmpty()) {
                     System.err.println("List of credit cards is empty! Something wrong!");
                     logger.error("Something wrong with printing cards with max debt");
@@ -140,7 +140,7 @@ public class Main {
 
             case "expired cards":
                 System.out.println("Ok, one second...");
-                List<CreditCard> expiredCards = expiryDateReport.getAlreadyExpiredCards();
+                List<Card> expiredCards = expiryDateReport.getAlreadyExpiredCards();
                 if (expiredCards.isEmpty()) {
                     System.out.println("List of expired cards is empty. Maybe all cards are ok.");
                     logger.info("List of expired cards is empty");
@@ -161,7 +161,7 @@ public class Main {
                     e.printStackTrace();
                     break;
                 }
-                List<CreditCard> soonExpireCards = expiryDateReport.getSoonExpiredCards(month);
+                List<Card> soonExpireCards = expiryDateReport.getSoonExpiredCards(month);
                 if (soonExpireCards.isEmpty()) {
                     System.out.println("List of soon expire cards is empty. Maybe all cards are ok.");
                     logger.info("List of soon expire cards (month = " + month + ") is empty");
@@ -175,7 +175,7 @@ public class Main {
         }
     }
 
-    private static void handlingActionQuery(String query) {
+    private static void handlingActionQuery(String query) throws SQLException, LoginToMySQLException, ClassNotFoundException {
         CloseCardByNumber closeCardByNumberActor = new CloseCardByNumber();
         MakePaymentByCard makePaymentByCardActor = new MakePaymentByCard();
         OpenNewCardToClient openNewCardActor = new OpenNewCardToClient();
@@ -281,7 +281,7 @@ public class Main {
                 printer1.print(reportsByTables.getAllClients());
                 break;
             case "cards":
-                TablePrinter<CreditCard> printer2 = new TablePrinter<>();
+                TablePrinter<Card> printer2 = new TablePrinter<>();
                 printer2.print(reportsByTables.getAllCards());
                 break;
             case "payments":

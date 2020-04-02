@@ -2,7 +2,7 @@ package services.reports;
 
 import dao.impl.ClientDAOImpl;
 import dao.impl.LoginToMySQLException;
-import entities.CreditCard;
+import entities.Card;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,8 +13,8 @@ public class ReportCardsByClientName {
 
     private final static Logger logger = Logger.getLogger(String.valueOf(ReportCardsByClientName.class));
 
-    public List<CreditCard> getReport(String name) {
-        List<CreditCard> cards = new ArrayList<>();
+    public List<Card> getReport(String name) {
+        List<Card> cards = new ArrayList<>();
         try {
             cards = new ClientDAOImpl().retrieveClientsCardsByName(name);
             logger.info("List of client's credit cards is generated");

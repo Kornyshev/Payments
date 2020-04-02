@@ -3,7 +3,7 @@ package utils;
 import dao.impl.CardDAOImpl;
 import dao.impl.LoginToMySQLException;
 import dao.impl.PaymentDAOImpl;
-import dao.interfaces.CreditCardDAO;
+import dao.interfaces.CardDAO;
 import dao.interfaces.PaymentDAO;
 import entities.Payment;
 import entities.PaymentType;
@@ -53,8 +53,8 @@ public class RandomPaymentsForDB {
             throws SQLException, ClassNotFoundException, LoginToMySQLException {
         Set<Payment> payments = new HashSet<>();
         Set<Long> cardNumbers = new HashSet<>();
-        CreditCardDAO creditCardDAO = new CardDAOImpl();
-        creditCardDAO.retrieveAll()
+        CardDAO cardDAO = new CardDAOImpl();
+        cardDAO.retrieveAll()
                 .forEach(card -> cardNumbers.add(card.cardNumber));
         for (Long number : cardNumbers) {
             int rnd = (int) (Math.random() * 10) + 1;

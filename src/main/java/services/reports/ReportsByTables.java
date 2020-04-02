@@ -5,7 +5,7 @@ import dao.impl.CardDAOImpl;
 import dao.impl.LoginToMySQLException;
 import dao.impl.PaymentDAOImpl;
 import entities.Client;
-import entities.CreditCard;
+import entities.Card;
 import entities.Payment;
 import org.apache.log4j.Logger;
 
@@ -21,7 +21,7 @@ public class ReportsByTables {
         return new ClientDAOImpl().retrieveAll();
     }
 
-    public List<CreditCard> getAllCards() throws SQLException, ClassNotFoundException, LoginToMySQLException {
+    public List<Card> getAllCards() throws SQLException, ClassNotFoundException, LoginToMySQLException {
         logger.info("Method ReportsByTable.getAllCards() was called");
         return new CardDAOImpl().retrieveAll();
     }

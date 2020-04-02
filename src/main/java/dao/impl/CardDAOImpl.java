@@ -1,9 +1,9 @@
 package dao.impl;
 
 import dao.interfaces.ClientDAO;
-import dao.interfaces.CreditCardDAO;
+import dao.interfaces.CardDAO;
 import dao.interfaces.DAO;
-import entities.CreditCard;
+import entities.Card;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardDAOImpl implements CreditCardDAO {
+public class CardDAOImpl implements CardDAO {
 
     private Connection conn;
     private PreparedStatement st;
@@ -27,7 +27,7 @@ public class CardDAOImpl implements CreditCardDAO {
     }
 
     @Override
-    public int insert(CreditCard entity) throws SQLException, ClassNotFoundException, LoginToMySQLException {
+    public int insert(Card entity) throws SQLException, ClassNotFoundException, LoginToMySQLException {
         st = conn.prepareStatement("INSERT INTO `payments_project`.`credit_cards`" +
                 "(`number`,`client_id`,`limit`,`balance`,`expiry_date`) VALUES (?, ?, ?, ?, ?);");
         ClientDAO clientDAO = new ClientDAOImpl();
@@ -39,17 +39,22 @@ public class CardDAOImpl implements CreditCardDAO {
         int res = st.executeUpdate();
         res += clientDAO.updateClientsCardsQuantity(entity.clientID, 1);
         DAO.closing(st, conn);
-        logger.info("Credit card with the id = " + entity.id + " successfully inserted");
+        if (res == 0) {
+            logger.error("Something wrong with inserting card - " + entity);
+        } else {
+            logger.info("Credit card with the id = " + entity.id + " successfully inserted");
+        }
         return res;
     }
 
     @Override
-    public CreditCard retrieve(int id) throws SQLException {
-        CreditCard card = new CreditCard();
+    public Card retrieve(int id) throws SQLException {
+        Card card = null;
         st = conn.prepareStatement("SELECT * FROM payments_project.credit_cards WHERE id = ?;");
         st.setLong(1, id);
         rs = st.executeQuery();
         while (rs.next()) {
+            card = new Card();
             card.id = id;
             card.cardNumber = rs.getLong("number");
             card.clientID = rs.getInt("client_id");
@@ -58,13 +63,17 @@ public class CardDAOImpl implements CreditCardDAO {
             card.expiryDate = rs.getString("expiry_date");
         }
         DAO.closing(rs, st, conn);
-        logger.info("Credit card with the id = " + id + " successfully retrieved");
+        if (card == null) {
+            logger.error("Something wrong with retrieving card by ID - " + id);
+        } else {
+            logger.info("Credit card with the id = " + id + " successfully retrieved");
+        }
         return card;
     }
 
     @Override
-    public List<CreditCard> retrieveAll() throws SQLException {
-        List<CreditCard> cards = new ArrayList<>();
+    public List<Card> retrieveAll() throws SQLException {
+        List<Card> cards = new ArrayList<>();
         st = conn.prepareStatement("SELECT * FROM payments_project.credit_cards;");
         rs = st.executeQuery();
         int id;
@@ -80,36 +89,39 @@ public class CardDAOImpl implements CreditCardDAO {
             limit = rs.getInt("limit");
             balance = rs.getInt("balance");
             expiryDate = rs.getString("expiry_date");
-            cards.add(new CreditCard(id, number, clientId, limit, balance, expiryDate));
+            cards.add(new Card(id, number, clientId, limit, balance, expiryDate));
         }
         DAO.closing(rs, st, conn);
-        logger.info("List of all credit cards was retrieved");
+        logger.info("List of all credit cards was retrieved, size = " + cards.size());
         return cards;
     }
 
     @Override
-    public CreditCard retrieveCardByNumber(long number) throws SQLException {
+    public Card retrieveCardByNumber(long number) throws SQLException {
         st = conn.prepareStatement("SELECT * FROM payments_project.credit_cards WHERE number = ?;");
         st.setLong(1, number);
         rs = st.executeQuery();
-        int clientId = 0;
-        int limit = 0;
-        int balance = 0;
-        String expiryDate = "";
+        Card card = null;
         while (rs.next()) {
-            clientId = rs.getInt("client_id");
-            limit = rs.getInt("limit");
-            balance = rs.getInt("balance");
-            expiryDate = rs.getString("expiry_date");
+            int id = rs.getInt("id");
+            int clientId = rs.getInt("client_id");
+            int limit = rs.getInt("limit");
+            int balance = rs.getInt("balance");
+            String expiryDate = rs.getString("expiry_date");
+            card = new Card(id, number, clientId, limit, balance, expiryDate);
         }
         DAO.closing(rs, st, conn);
-        logger.info("Credit card with the number = " + number + " successfully retrieved");
-        return new CreditCard(number, clientId, limit, balance, expiryDate);
+        if (card == null) {
+            logger.error("Something wrong with retrieving card by number - " + number);
+        } else {
+            logger.info("Credit card with the number = " + number + " successfully retrieved");
+        }
+        return card;
     }
 
     @Override
-    public List<CreditCard> retrieveCardsByExpiryDate(String expiryDate) throws SQLException {
-        List<CreditCard> cards = new ArrayList<>();
+    public List<Card> retrieveCardsByExpiryDate(String expiryDate) throws SQLException {
+        List<Card> cards = new ArrayList<>();
         st = conn.prepareStatement("SELECT * FROM payments_project.credit_cards WHERE expiry_date = ?;");
         st.setString(1, expiryDate);
         rs = st.executeQuery();
@@ -123,16 +135,17 @@ public class CardDAOImpl implements CreditCardDAO {
             limit = rs.getInt("limit");
             balance = rs.getInt("balance");
             expiryDate = rs.getString("expiry_date");
-            cards.add(new CreditCard(number, clientId, limit, balance, expiryDate));
+            cards.add(new Card(number, clientId, limit, balance, expiryDate));
         }
         DAO.closing(rs, st, conn);
-        logger.info("List of credit cards with expiry date = " + expiryDate + " retrieved");
+        logger.info("List of credit cards with expiry date = " + expiryDate +
+                " retrieved, size = " + cards.size());
         return cards;
     }
 
     @Override
     public int retrieveCardBalanceByNumber(long number) throws SQLException {
-        int balance = 0;
+        int balance = -1;
         st = conn.prepareStatement("SELECT balance FROM payments_project.credit_cards WHERE number = ?;");
         st.setLong(1, number);
         rs = st.executeQuery();
@@ -140,12 +153,16 @@ public class CardDAOImpl implements CreditCardDAO {
             balance = rs.getInt("balance");
         }
         DAO.closing(rs, st, conn);
-        logger.info("Balance of credit card with number = " + number + " retrieved");
+        if (balance == -1) {
+            logger.error("Something wrong with retrieving card's balance by number = " + number);
+        } else {
+            logger.info("Balance of credit card with number = " + number + " retrieved");
+        }
         return balance;
     }
 
     @Override
-    public int update(CreditCard entity) throws SQLException {
+    public int update(Card entity) throws SQLException {
         st = conn.prepareStatement("UPDATE `payments_project`.`credit_cards` SET " +
                 "`id` = ?, `number` = ?, `client_id` = ?, `limit` = ?, `balance` = ?, `expiry_date` = ? WHERE `id` = ?;");
         st.setInt(1, entity.id);
@@ -157,7 +174,11 @@ public class CardDAOImpl implements CreditCardDAO {
         st.setInt(7, entity.id);
         int res = st.executeUpdate();
         DAO.closing(st, conn);
-        logger.info("Credit card with the id = " + entity.id + " successfully updated");
+        if (res == 0) {
+            logger.error("Something wrong with updating card - " + entity);
+        } else {
+            logger.info("Credit card with the id = " + entity.id + " successfully updated");
+        }
         return res;
     }
 
@@ -168,18 +189,29 @@ public class CardDAOImpl implements CreditCardDAO {
         st.setLong(2, number);
         int res = st.executeUpdate();
         DAO.closing(st, conn);
-        logger.info("Balance of credit card with the number = " + number + " successfully updated");
+        if (res == 0) {
+            logger.error("Something wrong with updating card's balance by number - " + number);
+        } else {
+            logger.info("Balance of credit card with the number = " + number + " successfully updated");
+        }
         return res;
     }
 
     @Override
     public int updateCreditLimitByNumber(long number, int newLimit) throws SQLException {
+        if (newLimit < 0) {
+            return -1;
+        }
         st = conn.prepareStatement("UPDATE `payments_project`.`credit_cards` SET `limit` = ? WHERE `number` = ?;");
         st.setInt(1, newLimit);
         st.setLong(2, number);
         int res = st.executeUpdate();
         DAO.closing(st, conn);
-        logger.info("Credit limit of credit card with the number = " + number + " successfully updated");
+        if (res == 0) {
+            logger.error("Something wrong with updating card's limit by number - " + number);
+        } else {
+            logger.info("Limit of credit card with the number = " + number + " successfully updated");
+        }
         return res;
     }
 
@@ -189,10 +221,14 @@ public class CardDAOImpl implements CreditCardDAO {
         st.setInt(1, id);
         int res = st.executeUpdate();
         ClientDAO clientDAO = new ClientDAOImpl();
-        CreditCardDAO cardDAO = new CardDAOImpl();
-        clientDAO.updateClientsCardsQuantity(cardDAO.retrieve(id).clientID, -1);
+        CardDAO cardDAO = new CardDAOImpl();
+        res += clientDAO.updateClientsCardsQuantity(cardDAO.retrieve(id).clientID, -1);
         DAO.closing(st, conn);
-        logger.info("Credit card with the id = " + id + " successfully deleted (force method)");
+        if (res == 0) {
+            logger.error("Something wrong with deletion card by id - " + id);
+        }else {
+            logger.info("Credit card with the id = " + id + " successfully deleted (force method)");
+        }
         return res;
     }
 
@@ -202,23 +238,27 @@ public class CardDAOImpl implements CreditCardDAO {
         st.setLong(1, number);
         int res = st.executeUpdate();
         ClientDAO clientDAO = new ClientDAOImpl();
-        CreditCardDAO cardDAO = new CardDAOImpl();
+        CardDAO cardDAO = new CardDAOImpl();
         clientDAO.updateClientsCardsQuantity
                 (cardDAO.retrieveCardByNumber(number).clientID, -1);
         DAO.closing(st, conn);
-        logger.info("Credit card with the number = " + number + " successfully deleted (force method)");
+        if (res == 0) {
+            logger.error("Something wrong with deletion card by number - " + number);
+        }else {
+            logger.info("Credit card with the number = " + number + " successfully deleted (force method)");
+        }
         return res;
     }
 
     @Override
     public int cardDeletionWithCheckingByNumber(long number)
             throws SQLException, ClassNotFoundException, LoginToMySQLException {
-        CreditCardDAO cardDAOFirst = new CardDAOImpl();
-        CreditCard card = cardDAOFirst.retrieveCardByNumber(number);
-        if (card.creditLimit > card.balance) {
+        CardDAO cardDAOFirst = new CardDAOImpl();
+        Card card = cardDAOFirst.retrieveCardByNumber(number);
+        if (card == null || card.creditLimit > card.balance) {
             return -1;
         } else {
-            CreditCardDAO cardDAOSecond = new CardDAOImpl();
+            CardDAO cardDAOSecond = new CardDAOImpl();
             if (cardDAOSecond.deleteCardByNumber(number) > 0) {
                 logger.info("Credit card with the number = " + number + " successfully deleted (soft method)");
                 return card.balance - card.creditLimit;
