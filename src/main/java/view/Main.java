@@ -52,7 +52,7 @@ public class Main {
         }
     }
 
-    private static void handlingReportQuery(String query) {
+    private static void handlingReportQuery(String query) throws SQLException, LoginToMySQLException, ClassNotFoundException {
         TablePrinter<Card> cardTablePrinter = new TablePrinter<>();
         TablePrinter<Payment> paymentTablePrinter = new TablePrinter<>();
         ReportCardsByClientName cardsByClientNameReport = new ReportCardsByClientName();

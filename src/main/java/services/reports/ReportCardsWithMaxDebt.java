@@ -13,13 +13,17 @@ import java.util.stream.Collectors;
 
 public class ReportCardsWithMaxDebt {
 
-    private static final int CARDS_QUANTITY = 50;
+    public static final int CARDS_QUANTITY = 50;
     private static final Logger logger = Logger.getLogger(ReportCardsWithMaxDebt.class);
+    private CardDAO cardDAO = new CardDAOImpl();
+
+    public ReportCardsWithMaxDebt()
+            throws SQLException, LoginToMySQLException, ClassNotFoundException {
+    }
 
     public List<Card> getReport() {
         List<Card> res = new ArrayList<>();
         try {
-            CardDAO cardDAO = new CardDAOImpl();
             res = cardDAO.retrieveAll()
                     .stream()
                     .sorted((o1, o2) -> {
@@ -32,7 +36,7 @@ public class ReportCardsWithMaxDebt {
                     .limit(CARDS_QUANTITY)
                     .collect(Collectors.toList());
             logger.info("List of " + CARDS_QUANTITY + " credit cards with Max debt is generated");
-        } catch (SQLException | ClassNotFoundException | LoginToMySQLException e) {
+        } catch (SQLException e) {
             logger.error("Something wrong with list of credit cards with Max debt", e);
             e.printStackTrace();
         }

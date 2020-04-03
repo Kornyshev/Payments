@@ -2,6 +2,7 @@ package services.reports;
 
 import dao.impl.CardDAOImpl;
 import dao.impl.LoginToMySQLException;
+import dao.interfaces.*;
 import entities.Card;
 import org.apache.log4j.Logger;
 
@@ -12,13 +13,19 @@ import java.util.stream.Collectors;
 public class ReportsAboutExpiryDate {
 
     private final static Logger logger = Logger.getLogger(ReportsAboutExpiryDate.class);
+    private CardDAO cardDAOSoonExpire = new CardDAOImpl();
+    private CardDAO cardDAOAlreadyExpired = new CardDAOImpl();
+
+    public ReportsAboutExpiryDate()
+            throws SQLException, LoginToMySQLException, ClassNotFoundException {
+    }
 
     public List<Card> getSoonExpiredCards(int months) {
         List<Card> cards = new ArrayList<>();
         try {
-            cards = new CardDAOImpl().retrieveAll();
+            cards = cardDAOSoonExpire.retrieveAll();
             logger.info("List of all credit cards is generated for filtering by Stream methods");
-        } catch (SQLException | ClassNotFoundException | LoginToMySQLException e) {
+        } catch (SQLException e) {
             logger.error("Something wrong with retrieving all credit cards from DB", e);
             e.printStackTrace();
         }
@@ -31,15 +38,15 @@ public class ReportsAboutExpiryDate {
     public List<Card> getAlreadyExpiredCards() {
         List<Card> cards = new ArrayList<>();
         try {
-            cards = new CardDAOImpl().retrieveAll();
+            cards = cardDAOAlreadyExpired.retrieveAll();
             logger.info("List of all credit cards is generated for filtering by Stream methods");
-        } catch (SQLException | ClassNotFoundException | LoginToMySQLException e) {
+        } catch (SQLException e) {
             logger.error("Something wrong with retrieving all credit cards from DB", e);
             e.printStackTrace();
         }
         return cards.
                 stream().
-                filter(card -> comparingDates(card.expiryDate, currentDate()) == -1).
+                filter(card -> comparingDates(card.expiryDate, currentDate()) < 0).
                 collect(Collectors.toList());
     }
 

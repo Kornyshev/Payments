@@ -28,7 +28,7 @@ public class UpdateLimitOnCardTest {
 	public void testUpdateWithNegativeLimit() throws SQLException {
 		int negativeLimit = -1000;
 		when(cardDAOMock.updateCreditLimitByNumber(correctNumber, negativeLimit)).thenReturn(-1);
-		assertEquals(updateLimitOnCardActor.updateLimit(correctNumber, negativeLimit), -2);
+		assertEquals(updateLimitOnCardActor.updateLimit(correctNumber, negativeLimit), -1);
 	}
 
 	@Test

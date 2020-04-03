@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/Projects/PaymentsHomeWork/Payments">
+        <classes>
+            <class name="mockitoExperiments.MockitoExperiment">
+                <methods>
+                    <include name="test"/>
+                </methods>
+            </class>
+            <class name="services.actions.CloseCardByNumberTest">
+                <methods>
+                    <include name="testCloseCardSuccessful"/>
+                    <include name="testCloseCardUnsuccessful"/>
+                </methods>
+            </class>
+            <class name="services.actions.MakePaymentByCardTest">
+                <methods>
+                    <include name="testMakePaymentWithIncorrectCardNumber"/>
+                    <include name="testMakePaymentWithIncorrectDestination"/>
+                    <include name="testMakePaymentWithCorrectPayment"/>
+                </methods>
+            </class>
+            <class name="services.actions.OpenNewCardToClientTest">
+                <methods>
+                    <include name="testNegativeLimitOrBalance"/>
+                    <include name="testInexistentClient"/>
+                    <include name="testCorrectCardOpening"/>
+                </methods>
+            </class>
+            <class name="services.actions.UpdateLimitOnCardTest">
+                <methods>
+                    <include name="testUpdateWithNegativeLimit"/>
+                    <include name="testUpdateWithIncorrectNumber"/>
+                    <include name="testUpdateWithCorrectData"/>
+                </methods>
+            </class>
+            <class name="services.reports.ReportCardsByClientNameTest">
+                <methods>
+                    <include name="testGetReportWithCorrectName"/>
+                    <include name="testGetReportWithIncorrectName"/>
+                </methods>
+            </class>
+            <class name="services.reports.ReportCardsWithMaxDebtTest">
+                <methods>
+                    <include name="testReportListSize"/>
+                    <include name="testOrderInReport"/>
+                </methods>
+            </class>
+            <class name="services.reports.ReportPaymentsByCardTest">
+                <methods>
+                    <include name="testGetReportWithCorrectNumber"/>
+                    <include name="testGetReportWithIncorrectNumber"/>
+                </methods>
+            </class>
+            <class name="services.reports.ReportPaymentsByClientNameTest">
+                <methods>
+                    <include name="testGetReportWithCorrectName"/>
+                    <include name="testGetReportWithIncorrectNumber"/>
+                </methods>
+            </class>
+            <class name="services.reports.ReportsByTablesTest">
+                <methods>
+                    <include name="testGetAllClients"/>
+                    <include name="testGetAllCards"/>
+                    <include name="testGetAllPayments"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
