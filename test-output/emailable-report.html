@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset='utf-8'>
+<title>TestNG Report</title>
+<style type="text/css">
+table {margin-bottom:10px;border-collapse:collapse;empty-cells:show}
+td,th {border:1px solid #009;padding:.25em .5em}
+.result th {vertical-align:bottom}
+.param th {padding-left:1em;padding-right:1em}
+.param td {padding-left:.5em;padding-right:2em}
+.stripe td,.stripe th {background-color: #E6EBF9}
+.numi,.numi_attn {text-align:right}
+.total td {font-weight:bold}
+.passedodd td {background-color: #0A0}
+.passedeven td {background-color: #3F3}
+.skippedodd td {background-color: #CCC}
+.skippedodd td {background-color: #DDD}
+.failedodd td,.numi_attn {background-color: #F33}
+.failedeven td,.stripe .numi_attn {background-color: #D00}
+.stacktrace {white-space:pre;font-family:monospace}
+.totop {font-size:85%;text-align:center;border-bottom:2px solid #000}
+</style>
+</head>
+<body>
+<table cellspacing="0" cellpadding="0" class="testOverview">
+<tr><th>Test</th><th>Methods<br/>Passed</th><th>Scenarios<br/>Passed</th><th># skipped</th><th># failed</th><th>Total<br/>Time</th><th>Included<br/>Groups</th><th>Excluded<br/>Groups</th></tr>
+<tr><td style="text-align:left;padding-right:2em"><a href="#t1">C:/Projects/PaymentsHomeWork/Payments</a></td><td class="numi">23</td><td class="numi">23</td><td class="numi">0</td><td class="numi">0</td><td class="numi">4.0 seconds</td><td class="numi"></td><td class="numi"></td></tr>
+</table>
+<table cellspacing="0" cellpadding="0" class="methodOverview" id="summary">
+<tr><th>Class</th><th>Method</th><th># of<br/>Scenarios</th><th>Start</th><th>Time<br/>(ms)</th></tr>
+<tr id="t1"><th colspan="5">C:/Projects/PaymentsHomeWork/Payments &#8212; passed</th></tr>
+<tr class="passedodd"><td>mockitoExperiments.MockitoExperiment</td><td><a href="#m1"><b>test</b>  </a></td><td class="numi">1</td><td>1585900767700</td><td class="numi">54</td></tr>
+<tr class="passedeven"><td rowspan="2">services.actions.CloseCardByNumberTest</td><td><a href="#m2"><b>testCloseCardSuccessful</b>  </a></td><td class="numi">1</td><td>1585900769398</td><td class="numi">21</td></tr><tr class="passedeven"><td><a href="#m3"><b>testCloseCardUnsuccessful</b>  </a></td><td class="numi">1</td><td>1585900769420</td><td class="numi">1</td></tr>
+<tr class="passedodd"><td rowspan="3">services.actions.MakePaymentByCardTest</td><td><a href="#m4"><b>testMakePaymentWithIncorrectCardNumber</b>  </a></td><td class="numi">1</td><td>1585900769531</td><td class="numi">1</td></tr><tr class="passedodd"><td><a href="#m5"><b>testMakePaymentWithIncorrectDestination</b>  </a></td><td class="numi">1</td><td>1585900769568</td><td class="numi">4</td></tr><tr class="passedodd"><td><a href="#m6"><b>testMakePaymentWithCorrectPayment</b>  </a></td><td class="numi">1</td><td>1585900769576</td><td class="numi">18</td></tr>
+<tr class="passedeven"><td rowspan="3">services.actions.OpenNewCardToClientTest</td><td><a href="#m7"><b>testNegativeLimitOrBalance</b>  </a></td><td class="numi">1</td><td>1585900769726</td><td class="numi">3</td></tr><tr class="passedeven"><td><a href="#m8"><b>testInexistentClient</b>  </a></td><td class="numi">1</td><td>1585900769730</td><td class="numi">11</td></tr><tr class="passedeven"><td><a href="#m9"><b>testCorrectCardOpening</b>  </a></td><td class="numi">1</td><td>1585900769742</td><td class="numi">318</td></tr>
+<tr class="passedodd"><td rowspan="3">services.actions.UpdateLimitOnCardTest</td><td><a href="#m10"><b>testUpdateWithNegativeLimit</b>  </a></td><td class="numi">1</td><td>1585900770119</td><td class="numi">5</td></tr><tr class="passedodd"><td><a href="#m11"><b>testUpdateWithIncorrectNumber</b>  </a></td><td class="numi">1</td><td>1585900770125</td><td class="numi">0</td></tr><tr class="passedodd"><td><a href="#m12"><b>testUpdateWithCorrectData</b>  </a></td><td class="numi">1</td><td>1585900770127</td><td class="numi">8</td></tr>
+<tr class="passedeven"><td rowspan="2">services.reports.ReportCardsByClientNameTest</td><td><a href="#m13"><b>testGetReportWithCorrectName</b>  </a></td><td class="numi">1</td><td>1585900770218</td><td class="numi">2</td></tr><tr class="passedeven"><td><a href="#m14"><b>testGetReportWithIncorrectName</b>  </a></td><td class="numi">1</td><td>1585900770222</td><td class="numi">2</td></tr>
+<tr class="passedodd"><td rowspan="2">services.reports.ReportCardsWithMaxDebtTest</td><td><a href="#m15"><b>testReportListSize</b>  </a></td><td class="numi">1</td><td>1585900770303</td><td class="numi">139</td></tr><tr class="passedodd"><td><a href="#m16"><b>testOrderInReport</b>  </a></td><td class="numi">1</td><td>1585900770443</td><td class="numi">49</td></tr>
+<tr class="passedeven"><td rowspan="2">services.reports.ReportPaymentsByCardTest</td><td><a href="#m17"><b>testGetReportWithCorrectNumber</b>  </a></td><td class="numi">1</td><td>1585900770593</td><td class="numi">1</td></tr><tr class="passedeven"><td><a href="#m18"><b>testGetReportWithIncorrectNumber</b>  </a></td><td class="numi">1</td><td>1585900770596</td><td class="numi">1</td></tr>
+<tr class="passedodd"><td rowspan="2">services.reports.ReportPaymentsByClientNameTest</td><td><a href="#m19"><b>testGetReportWithCorrectName</b>  </a></td><td class="numi">1</td><td>1585900770652</td><td class="numi">1</td></tr><tr class="passedodd"><td><a href="#m20"><b>testGetReportWithIncorrectNumber</b>  </a></td><td class="numi">1</td><td>1585900770654</td><td class="numi">1</td></tr>
+<tr class="passedeven"><td rowspan="3">services.reports.ReportsByTablesTest</td><td><a href="#m21"><b>testGetAllClients</b>  </a></td><td class="numi">1</td><td>1585900770776</td><td class="numi">74</td></tr><tr class="passedeven"><td><a href="#m22"><b>testGetAllCards</b>  </a></td><td class="numi">1</td><td>1585900770851</td><td class="numi">71</td></tr><tr class="passedeven"><td><a href="#m23"><b>testGetAllPayments</b>  </a></td><td class="numi">1</td><td>1585900770923</td><td class="numi">282</td></tr>
+</table>
+<h1>C:/Projects/PaymentsHomeWork/Payments</h1>
+<h2 id="m1">services.actions.CloseCardByNumberTest:testCloseCardSuccessful</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m2">services.actions.UpdateLimitOnCardTest:testUpdateWithIncorrectNumber</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m3">services.reports.ReportPaymentsByCardTest:testGetReportWithIncorrectNumber</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m4">services.reports.ReportPaymentsByClientNameTest:testGetReportWithCorrectName</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m5">services.actions.UpdateLimitOnCardTest:testUpdateWithNegativeLimit</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m6">mockitoExperiments.MockitoExperiment:test</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m7">services.reports.ReportPaymentsByClientNameTest:testGetReportWithIncorrectNumber</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m8">services.reports.ReportCardsByClientNameTest:testGetReportWithCorrectName</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m9">services.reports.ReportCardsByClientNameTest:testGetReportWithIncorrectName</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m10">services.reports.ReportCardsWithMaxDebtTest:testOrderInReport</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m11">services.actions.MakePaymentByCardTest:testMakePaymentWithIncorrectCardNumber</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m12">services.actions.OpenNewCardToClientTest:testCorrectCardOpening</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m13">services.reports.ReportsByTablesTest:testGetAllCards</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m14">services.actions.CloseCardByNumberTest:testCloseCardUnsuccessful</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m15">services.reports.ReportPaymentsByCardTest:testGetReportWithCorrectNumber</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m16">services.actions.OpenNewCardToClientTest:testInexistentClient</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m17">services.actions.UpdateLimitOnCardTest:testUpdateWithCorrectData</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m18">services.reports.ReportsByTablesTest:testGetAllPayments</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m19">services.actions.MakePaymentByCardTest:testMakePaymentWithCorrectPayment</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m20">services.reports.ReportsByTablesTest:testGetAllClients</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m21">services.actions.OpenNewCardToClientTest:testNegativeLimitOrBalance</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m22">services.actions.MakePaymentByCardTest:testMakePaymentWithIncorrectDestination</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m23">services.reports.ReportCardsWithMaxDebtTest:testReportListSize</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+</body></html>
